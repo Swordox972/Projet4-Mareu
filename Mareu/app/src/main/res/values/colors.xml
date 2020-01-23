@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <array name="room_color">
+        <item name="room1">#E01E1E</item>
+        <item name="room2">#CE9A4B</item>
+        <item name="room3">#ECD93F</item>
+        <item name="room4">#8BC34A</item>
+        <item name="room5">#5DDACE</item>
+        <item name="room6">#03A9F4</item>
+        <item name="room7">#10259C</item>
+        <item name="room8">#9C27B0</item>
+        <item name="room9">#FFFFFF</item>
+        <item name="room10">#000000</item>
+
+    </array>
+
+    <color name="transparent">@android:color/transparent</color>
+
+</resources>
