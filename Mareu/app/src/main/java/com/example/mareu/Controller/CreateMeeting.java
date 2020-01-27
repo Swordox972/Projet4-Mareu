@@ -16,8 +16,11 @@ import android.widget.Spinner;
 import com.example.mareu.Model.Meeting;
 import com.example.mareu.Model.Participant;
 import com.example.mareu.R;
+import com.example.mareu.Service.DummyMeetingGenerator;
+import com.example.mareu.Service.MeetingApiService;
 import com.example.mareu.Service.Meetings;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CreateMeeting extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -28,10 +31,10 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
     private Button mTimePickerButton;
     private char mRoomSelected;
     private Button mParticipantsButton;
+    ArrayList<Participant> meetingParticipantList = new ArrayList<Participant>();
     int hour, minute;
     Meeting mMeeting;
 
-    private List<Participant> mMeetingParticipants;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,7 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
 
     public void participantsActivityIntent() {
         Intent mParticipantsIntent = new Intent(this, ListParticipantsActivity.class);
+        mParticipantsIntent.putParcelableArrayListExtra("ListParticipant", meetingParticipantList);
         startActivityForResult(mParticipantsIntent, 1);
     }
 
@@ -90,7 +94,7 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
                 mRoomSelected = mSpinnerRoomName.getSelectedItem().toString().charAt(0);
 
                 mMeeting = new Meeting(mRoomSelected, hour + ":" + minute,
-                        mMeetingSubject.getText().toString(),mMeetingParticipants);
+                        mMeetingSubject.getText().toString(), meetingParticipantList);
 
 
                 Meetings.getInstance().getMeetingList().add(mMeeting);
@@ -142,11 +146,14 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
                 mTimePickerButton.setText(hour + ":" + minute);
             } else {
             }
-
+        } else if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                meetingParticipantList = data.getParcelableArrayListExtra("ListParticipant");
+            } else {
+            }
         }
 
-        }
-
+    }
 
 
 }

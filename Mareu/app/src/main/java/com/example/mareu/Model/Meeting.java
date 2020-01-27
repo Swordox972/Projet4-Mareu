@@ -1,8 +1,10 @@
 package com.example.mareu.Model;
 
+import android.provider.Telephony;
 import android.support.annotation.Nullable;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,7 +13,6 @@ public class Meeting implements Serializable {
     private String meetingHour;
     private String meetingTopic;
     private List<Participant> meetingParticipants;
-
     // Constructeur par défault
     public Meeting() {
     }
@@ -52,9 +53,10 @@ public class Meeting implements Serializable {
         return meetingParticipants;
     }
 
-    public void setMeetingParcipants(List<Participant> meetingParcipants) {
-        this.meetingParticipants = meetingParcipants;
+    public void setMeetingParticipants(List<Participant> meetingParticipants) {
+        this.meetingParticipants = meetingParticipants;
     }
+
 
     @Override
     public boolean equals(@Nullable Object obj) {

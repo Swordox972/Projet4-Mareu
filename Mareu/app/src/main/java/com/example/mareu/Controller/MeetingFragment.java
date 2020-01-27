@@ -8,6 +8,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputFilter;
+import android.text.Layout;
 import android.util.EventLog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,7 @@ public class MeetingFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private List<Meeting> mMeetingList;
+    private TextView mParticipantView;
 
     public MeetingFragment() {
         // Required empty public constructor
@@ -52,7 +54,7 @@ public class MeetingFragment extends Fragment {
     }
 
     private void initList() {
-        mMeetingList= Meetings.getInstance().getMeetingList();
+        mMeetingList = Meetings.getInstance().getMeetingList();
         mRecyclerView.setAdapter(new MyMeetingRecyclerViewAdapter(mMeetingList));
     }
 
@@ -75,7 +77,7 @@ public class MeetingFragment extends Fragment {
     }
 
     @Subscribe
-    public void onDeleteMeeting(DeleteMeetingEvent event)  {
+    public void onDeleteMeeting(DeleteMeetingEvent event) {
         Meetings.getInstance().getMeetingList().remove(event.meeting);
         initList();
 

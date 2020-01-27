@@ -11,12 +11,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mareu.Model.Meeting;
+import com.example.mareu.Model.Participant;
 import com.example.mareu.R;
+import com.example.mareu.Service.DummyMeetingApiService;
+import com.example.mareu.Service.DummyMeetingGenerator;
 import com.example.mareu.Service.MeetingApiService;
 import com.example.mareu.events.DeleteMeetingEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -25,8 +29,17 @@ import butterknife.ButterKnife;
 public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeetingRecyclerViewAdapter.ViewHolder> {
 
     private List<Meeting> mMeetingList;
-    private MeetingApiService mApiService;
 
+
+    public String participantToString(List<Participant> meetingParticipants) {
+        String container = "";
+
+        for (int i = 0; i < meetingParticipants.size(); i++) {
+            String container1 = meetingParticipants.get(i).getNomParticipant();
+            container += container1;
+        }
+        return container;
+    }
 
     public MyMeetingRecyclerViewAdapter(List<Meeting> items) {
         this.mMeetingList = items;
@@ -38,18 +51,21 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_meeting, parent, false);
 
+
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final Meeting meeting = mMeetingList.get(position);
+        final List<Participant> mParticipantList = meeting.getMeetingParticipants();
+
         holder.mRoomColor.getResources().getStringArray(R.array.room_color);
 
         holder.mMeetingDescriptive.setText("Réunion " + meeting.getMeetingRoom() + " - "
                 + meeting.getMeetingHour() + " - " + meeting.getMeetingTopic());
 
-        holder.mMeetingParticipants.setText(mApiService.getMeeting().toString());
+        holder.mMeetingParticipants.setText(participantToString(meeting.getMeetingParticipants()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
