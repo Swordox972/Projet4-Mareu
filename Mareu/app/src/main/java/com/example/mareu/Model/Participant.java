@@ -32,8 +32,9 @@ public class Participant implements Parcelable {
     }
 
     public String getNomParticipant() {
-        return nomParticipant+"@lamzone.com";
+        return nomParticipant;
     }
+
 
     public void setNomParticipant(String nomParticipant) {
         this.nomParticipant = nomParticipant;

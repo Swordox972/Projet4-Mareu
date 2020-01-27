@@ -20,7 +20,10 @@ import com.example.mareu.Service.DummyMeetingGenerator;
 import com.example.mareu.Service.MeetingApiService;
 import com.example.mareu.Service.Meetings;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CreateMeeting extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -31,8 +34,12 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
     private Button mTimePickerButton;
     private char mRoomSelected;
     private Button mParticipantsButton;
-    ArrayList<Participant> meetingParticipantList = new ArrayList<Participant>();
-    int hour, minute;
+    ArrayList<Participant> meetingParticipantList = new ArrayList<>();
+    SimpleDateFormat dateFormat;
+    Date dateObj;
+    String time = "00:00";
+    String hour = "";
+    String minute = "";
     Meeting mMeeting;
 
 
@@ -51,7 +58,7 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
         confirmButtonClick();
 
         mTimePickerButton = findViewById(R.id.time_picker_button);
-        mTimePickerButton.setText("00:00");
+           returnTimeFormat(time);
         mTimePickerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,6 +76,16 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
 
     }
 
+    public void returnTimeFormat(String time) {
+
+        try {
+            dateFormat = new SimpleDateFormat("H:mm");
+            dateObj = dateFormat.parse(time);
+            mTimePickerButton.setText(new SimpleDateFormat("k:mm").format(dateObj));
+        } catch (final ParseException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void participantsActivityIntent() {
         Intent mParticipantsIntent = new Intent(this, ListParticipantsActivity.class);
@@ -93,7 +110,7 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
 
                 mRoomSelected = mSpinnerRoomName.getSelectedItem().toString().charAt(0);
 
-                mMeeting = new Meeting(mRoomSelected, hour + ":" + minute,
+                mMeeting = new Meeting(mRoomSelected, time,
                         mMeetingSubject.getText().toString(), meetingParticipantList);
 
 
@@ -115,6 +132,8 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
 
     }
 
+
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         parent.getItemAtPosition(position);
@@ -128,9 +147,7 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
     public void timePickerIntent() {
         Intent mTimePickerIntent = new Intent(this, TimePickerActivity.class);
 
-        mTimePickerIntent.putExtra("MEETING_HOUR", hour);
-        mTimePickerIntent.putExtra("MEETING_MINUTE", minute);
-
+        mTimePickerIntent.putExtra("MEETING_TIME", time);
         startActivityForResult(mTimePickerIntent, 0);
 
     }
@@ -141,9 +158,8 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
 
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
-                hour = data.getIntExtra("MEETING_HOUR", 2);
-                minute = data.getIntExtra("MEETING_MINUTE", 2);
-                mTimePickerButton.setText(hour + ":" + minute);
+                time = data.getStringExtra("MEETING_TIME");
+                 returnTimeFormat(time);
             } else {
             }
         } else if (requestCode == 1) {

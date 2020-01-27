@@ -33,7 +33,6 @@ public class MeetingFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private List<Meeting> mMeetingList;
-    private TextView mParticipantView;
 
     public MeetingFragment() {
         // Required empty public constructor
@@ -60,14 +59,16 @@ public class MeetingFragment extends Fragment {
 
     @Override
     public void onStart() {
-        EventBus.getDefault().register(this);
         super.onStart();
+        EventBus.getDefault().register(this);
+
     }
 
     @Override
     public void onStop() {
-        EventBus.getDefault().unregister(this);
         super.onStop();
+        EventBus.getDefault().unregister(this);
+
     }
 
     @Override

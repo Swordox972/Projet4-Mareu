@@ -35,9 +35,17 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
         String container = "";
 
         for (int i = 0; i < meetingParticipants.size(); i++) {
-            String container1 = meetingParticipants.get(i).getNomParticipant();
-            container += container1;
+            if (i == meetingParticipants.size() - 1) {
+                String container1 = meetingParticipants.get(i).getNomParticipant();
+                container += container1 + "@lamzone.com";
+            } else {
+                String container1 = meetingParticipants.get(i).getNomParticipant();
+
+                container += container1 + "@lamzone.com, ";
+            }
         }
+
+
         return container;
     }
 
@@ -58,7 +66,6 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final Meeting meeting = mMeetingList.get(position);
-        final List<Participant> mParticipantList = meeting.getMeetingParticipants();
 
         holder.mRoomColor.getResources().getStringArray(R.array.room_color);
 

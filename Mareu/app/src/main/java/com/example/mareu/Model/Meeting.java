@@ -13,6 +13,7 @@ public class Meeting implements Serializable {
     private String meetingHour;
     private String meetingTopic;
     private List<Participant> meetingParticipants;
+
     // Constructeur par défault
     public Meeting() {
     }
@@ -69,7 +70,8 @@ public class Meeting implements Serializable {
         }
 
         Meeting meeting = (Meeting) obj;
-        return Objects.equals(meetingRoom, meeting.meetingRoom);
+        return Objects.equals(meetingRoom + meetingHour + meetingTopic + meetingParticipants,
+                meeting.meetingRoom + meeting.meetingHour + meeting.meetingTopic + meeting.meetingParticipants);
     }
 
     @Override

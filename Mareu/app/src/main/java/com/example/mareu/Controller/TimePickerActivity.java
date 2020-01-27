@@ -9,12 +9,16 @@ import android.widget.Button;
 
 import com.example.mareu.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class TimePickerActivity extends AppCompatActivity {
 
     private android.widget.TimePicker mTimePicker;
     private Button mSaveButton;
-
-
+    SimpleDateFormat dateFormat;
+    Date dateObj;
 
 
     @Override
@@ -38,23 +42,37 @@ public class TimePickerActivity extends AppCompatActivity {
     }
 
     public void ReturnHour() {
-        Intent intent = new Intent();
+        try {
+            Intent intent = new Intent();
 
-        int hour, minute;
+            int hour, minute;
+            String time="";
+            String time1;
 
-        if (Build.VERSION.SDK_INT > 23) {
-            hour = mTimePicker.getHour();
-            minute = mTimePicker.getMinute();
 
-        } else {
-            hour = mTimePicker.getCurrentHour();
-            minute = mTimePicker.getCurrentMinute();
+            if (Build.VERSION.SDK_INT > 23) {
+                hour = mTimePicker.getHour();
+                minute = mTimePicker.getMinute();
+                time = Integer.toString(hour);
+                time1 = Integer.toString(minute);
+
+
+            } else {
+                hour = mTimePicker.getCurrentHour();
+                minute = mTimePicker.getCurrentMinute();
+                time = Integer.toString(hour);
+                time1 = Integer.toString(minute);
+            }
+
+            time += ":" + time1;
+            dateFormat = new SimpleDateFormat("k:mm");
+            dateObj= dateFormat.parse(time);
+            intent.putExtra("MEETING_TIME",time);
+            setResult(RESULT_OK, intent);
+        } catch (final ParseException e) {
+            e.printStackTrace();
         }
 
-        intent.putExtra("MEETING_HOUR", hour);
-        intent.putExtra("MEETING_MINUTE", minute);
-        setResult(RESULT_OK, intent);
+
     }
-
-
 }
