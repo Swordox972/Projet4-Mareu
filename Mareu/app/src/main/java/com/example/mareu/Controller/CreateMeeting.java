@@ -38,8 +38,6 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
     SimpleDateFormat dateFormat;
     Date dateObj;
     String time = "00:00";
-    String hour = "";
-    String minute = "";
     Meeting mMeeting;
 
 

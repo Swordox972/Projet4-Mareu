@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Controller.DetailMeetingActivity"></activity>
+        <activity android:name=".Controller.DetailMeetingActivity"
+            android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"></activity>
         <activity
             android:name=".Controller.ListParticipantsActivity"
             android:theme="@style/Theme.MaterialComponents.Light.Bridge" />

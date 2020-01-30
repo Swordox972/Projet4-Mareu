@@ -96,9 +96,15 @@ public class ListParticipantsActivity extends AppCompatActivity {
         listParticipant.add(participant2);
         listParticipant.add(participant3);
 
-        if (mParticipant1.getText().toString().isEmpty()) {listParticipant.remove(participant1);}
-        if (mParticipant2.getText().toString().isEmpty()) {listParticipant.remove(participant2);}
-        if (mParticipant3.getText().toString().isEmpty()) {listParticipant.remove(participant3);}
+        if (mParticipant1.getText().toString().isEmpty()) {
+            listParticipant.remove(participant1);
+        }
+        if (mParticipant2.getText().toString().isEmpty()) {
+            listParticipant.remove(participant2);
+        }
+        if (mParticipant3.getText().toString().isEmpty()) {
+            listParticipant.remove(participant3);
+        }
 
 
         for (int i = 0; i < listParticipantAdditional.size(); i++) {

@@ -13,14 +13,14 @@ import android.widget.TextView;
 import com.example.mareu.Model.Meeting;
 import com.example.mareu.Model.Participant;
 import com.example.mareu.R;
-import com.example.mareu.Service.DummyMeetingApiService;
-import com.example.mareu.Service.DummyMeetingGenerator;
-import com.example.mareu.Service.MeetingApiService;
 import com.example.mareu.events.DeleteMeetingEvent;
+import com.example.mareu.events.OpenMeetingEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -29,7 +29,19 @@ import butterknife.ButterKnife;
 public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeetingRecyclerViewAdapter.ViewHolder> {
 
     private List<Meeting> mMeetingList;
+    private SimpleDateFormat dateFormat;
+    private Date date;
 
+    public String returnTimeFormat(String time) {
+        try {
+            dateFormat = new SimpleDateFormat("H:mm");
+            date = dateFormat.parse(time);
+        } catch (final ParseException e) {
+            e.printStackTrace();
+        }
+
+        return new SimpleDateFormat("k:mm").format(date);
+    }
 
     public String participantToString(List<Participant> meetingParticipants) {
         String container = "";
@@ -70,13 +82,14 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
         holder.mRoomColor.getResources().getStringArray(R.array.room_color);
 
         holder.mMeetingDescriptive.setText("Réunion " + meeting.getMeetingRoom() + " - "
-                + meeting.getMeetingHour() + " - " + meeting.getMeetingTopic());
+                + returnTimeFormat(meeting.getMeetingHour()) + " - " + meeting.getMeetingTopic());
 
         holder.mMeetingParticipants.setText(participantToString(meeting.getMeetingParticipants()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                EventBus.getDefault().post(new OpenMeetingEvent(meeting));
 
             }
         });
