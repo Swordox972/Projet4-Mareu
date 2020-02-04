@@ -1,11 +1,14 @@
 package com.example.mareu.Controller;
 
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,17 +23,27 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeetingRecyclerViewAdapter.ViewHolder> {
+public class MyMeetingRecyclerViewAdapter extends
+        RecyclerView.Adapter<MyMeetingRecyclerViewAdapter.ViewHolder> {
 
+    Context context;
     private List<Meeting> mMeetingList;
     private SimpleDateFormat dateFormat;
     private Date date;
+
+
+
+    public MyMeetingRecyclerViewAdapter(Context context, List<Meeting> items) {
+        this.context = context;
+        this.mMeetingList = items;
+    }
 
     public String returnTimeFormat(String time) {
         try {
@@ -40,7 +53,7 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
             e.printStackTrace();
         }
 
-        return new SimpleDateFormat("k:mm").format(date);
+        return new SimpleDateFormat("H:mm").format(date);
     }
 
     public String participantToString(List<Participant> meetingParticipants) {
@@ -57,13 +70,9 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
             }
         }
 
-
         return container;
     }
 
-    public MyMeetingRecyclerViewAdapter(List<Meeting> items) {
-        this.mMeetingList = items;
-    }
 
     @NonNull
     @Override
@@ -126,4 +135,18 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
         }
     }
 
-}
+    public void updateList(List<Meeting> newMeetingList){
+        mMeetingList = newMeetingList;
+        notifyDataSetChanged();
+
+    }
+
+    }
+
+
+
+
+
+
+
+

@@ -6,11 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".Controller.MainActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@android:color/white"
+        android:background="@color/colorPrimary1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </android.support.v7.widget.Toolbar>
+
     <fragment
         android:id="@+id/meeting_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.example.mareu.Controller.MeetingFragment">
+        android:layout_height="0dp"
+        android:name="com.example.mareu.Controller.MeetingFragment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/my_toolbar"
+        app:layout_constraintStart_toStartOf="parent">
 
     </fragment>
 
@@ -21,6 +36,7 @@
         android:layout_marginBottom="30dp"
         android:layout_marginEnd="20dp"
         android:tint="@android:color/white"
+        android:backgroundTint="@color/colorAccent1"
         app:elevation="8dp"
         android:src="@drawable/baseline_add_black_48"
         app:layout_constraintBottom_toBottomOf="parent"

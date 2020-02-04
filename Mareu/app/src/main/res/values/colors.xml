@@ -18,6 +18,11 @@
 
     </array>
 
+
+    <color name="colorPrimary1">#1D82D1</color>
+    <color name="colorPrimaryDark1">#4279A7</color>
+    <color name="colorAccent1">@color/colorAccent</color>
+
     <color name="transparent">@android:color/transparent</color>
 
 </resources>

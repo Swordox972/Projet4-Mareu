@@ -79,7 +79,7 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
         try {
             dateFormat = new SimpleDateFormat("H:mm");
             dateObj = dateFormat.parse(time);
-            mTimePickerButton.setText(new SimpleDateFormat("k:mm").format(dateObj));
+            mTimePickerButton.setText(new SimpleDateFormat("H:mm").format(dateObj));
         } catch (final ParseException e) {
             e.printStackTrace();
         }
