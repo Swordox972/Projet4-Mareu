@@ -2,6 +2,9 @@ package com.example.mareu.Controller;
 
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,11 +24,13 @@ import com.example.mareu.events.OpenMeetingEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,6 +48,10 @@ public class MyMeetingRecyclerViewAdapter extends
     public MyMeetingRecyclerViewAdapter(Context context, List<Meeting> items) {
         this.context = context;
         this.mMeetingList = items;
+    }
+
+    private void returnColor() {
+
     }
 
     public String returnTimeFormat(String time) {
@@ -87,8 +96,18 @@ public class MyMeetingRecyclerViewAdapter extends
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final Meeting meeting = mMeetingList.get(position);
+        Random r = new Random();
+        int i1 = r.nextInt(10- 0) + 0;
 
-        holder.mRoomColor.getResources().getStringArray(R.array.room_color);
+        String[] myColors= context.getResources().getStringArray(R.array.room_color);
+         final String finalColor=myColors[i1];
+                GradientDrawable gradientDrawable= new GradientDrawable();
+                gradientDrawable.mutate();
+        gradientDrawable.setShape(GradientDrawable.OVAL);
+        gradientDrawable.setColor(Color.parseColor(finalColor));
+
+        holder.mRoomColor.setBackground(gradientDrawable);
+
 
         holder.mMeetingDescriptive.setText("Réunion " + meeting.getMeetingRoom() + " - "
                 + returnTimeFormat(meeting.getMeetingHour()) + " - " + meeting.getMeetingTopic());
