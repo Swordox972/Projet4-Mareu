@@ -18,7 +18,7 @@
             android:theme="@style/Theme.MaterialComponents.Light.Bridge" />
         <activity
             android:name=".Controller.TimePickerActivity"
-            android:theme="@style/Theme.AppCompat.Light.Dialog" />
+            />
         <activity android:name=".Controller.CreateMeeting" />
 
         <activity android:name=".Controller.MainActivity"

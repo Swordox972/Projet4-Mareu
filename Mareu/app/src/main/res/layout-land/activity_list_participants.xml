@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context=".Controller.ListParticipantsActivity">
+
+        <EditText
+            android:id="@+id/participant_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textSize="20sp">
+
+        </EditText>
+
+
+        <EditText
+            android:id="@+id/participant_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textSize="20sp">
+
+        </EditText>
+
+
+        <EditText
+            android:id="@+id/participant_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textSize="20sp">
+
+
+        </EditText>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ajouter d'autres participants"
+                android:textSize="20sp">
+
+            </TextView>
+
+            <ImageButton
+                android:id="@+id/add_more_participants"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@null"
+                android:src="@drawable/baseline_add_black_36"
+                android:tint="#F06A97">
+
+            </ImageButton>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linear_layout_participant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+        </LinearLayout>
+
+
+        <ImageButton
+            android:id="@+id/confirm_participants_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="350dp"
+            android:background="@null"
+            android:src="@drawable/baseline_done_black_36"
+            android:tint="#26DD2D"></ImageButton>
+
+
+    </LinearLayout>
+
+</ScrollView>

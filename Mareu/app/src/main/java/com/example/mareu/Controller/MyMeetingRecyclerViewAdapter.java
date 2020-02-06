@@ -42,7 +42,8 @@ public class MyMeetingRecyclerViewAdapter extends
     private List<Meeting> mMeetingList;
     private SimpleDateFormat dateFormat;
     private Date date;
-
+    private List<String> colorSave = new ArrayList<>();
+    private int count;
 
 
     public MyMeetingRecyclerViewAdapter(Context context, List<Meeting> items) {
@@ -50,9 +51,6 @@ public class MyMeetingRecyclerViewAdapter extends
         this.mMeetingList = items;
     }
 
-    private void returnColor() {
-
-    }
 
     public String returnTimeFormat(String time) {
         try {
@@ -96,17 +94,21 @@ public class MyMeetingRecyclerViewAdapter extends
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final Meeting meeting = mMeetingList.get(position);
-        Random r = new Random();
-        int i1 = r.nextInt(10- 0) + 0;
 
-        String[] myColors= context.getResources().getStringArray(R.array.room_color);
-         final String finalColor=myColors[i1];
-                GradientDrawable gradientDrawable= new GradientDrawable();
+        String[] myColors = context.getResources().getStringArray(R.array.room_color);
+
+
+        for (int i = 0; i < myColors.length; i++) {
+            if (position == i) {
+
+                GradientDrawable gradientDrawable = new GradientDrawable();
                 gradientDrawable.mutate();
-        gradientDrawable.setShape(GradientDrawable.OVAL);
-        gradientDrawable.setColor(Color.parseColor(finalColor));
+                gradientDrawable.setShape(GradientDrawable.OVAL);
+                gradientDrawable.setColor(Color.parseColor(myColors[i]));
+                holder.mRoomColor.setBackground(gradientDrawable);
 
-        holder.mRoomColor.setBackground(gradientDrawable);
+            }
+        }
 
 
         holder.mMeetingDescriptive.setText("Réunion " + meeting.getMeetingRoom() + " - "
@@ -154,13 +156,13 @@ public class MyMeetingRecyclerViewAdapter extends
         }
     }
 
-    public void updateList(List<Meeting> newMeetingList){
+    public void updateList(List<Meeting> newMeetingList) {
         mMeetingList = newMeetingList;
         notifyDataSetChanged();
 
     }
 
-    }
+}
 
 
 
