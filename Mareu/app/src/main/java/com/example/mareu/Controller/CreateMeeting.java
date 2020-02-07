@@ -163,6 +163,7 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
         } else if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 meetingParticipantList = data.getParcelableArrayListExtra("ListParticipant");
+                mParticipantsButton.setText("Enregistré");
             } else {
             }
         }

@@ -2,10 +2,10 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="300dp"
+    android:layout_width="550dp"
     android:layout_height="300dp"
     android:layout_marginTop="50dp"
-    android:layout_marginStart="35dp"
+    android:layout_marginStart="100dp"
     tools:context=".Controller.CreateMeeting">
 
 
@@ -35,11 +35,11 @@
         android:id="@+id/heure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
         android:text="Heure"
         android:textSize="30sp"
-        android:layout_marginTop="15dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/salle">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
     </TextView>
 
@@ -47,8 +47,8 @@
         android:id="@+id/time_picker_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/heure"
         app:layout_constraintBottom_toBottomOf="@id/heure"
+        app:layout_constraintStart_toEndOf="@id/heure"
         app:layout_constraintTop_toTopOf="@id/heure">
 
     </Button>
@@ -59,8 +59,11 @@
         android:layout_height="wrap_content"
         android:text="Sujet"
         android:textSize="30sp"
+       android:layout_marginStart="50dp"
+        android:layout_marginBottom="70dp"
         app:layout_constraintTop_toTopOf="@id/salle"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/my_spinner_room"
+
         app:layout_constraintBottom_toBottomOf="parent">
 
     </TextView>
@@ -83,12 +86,14 @@
          android:id="@+id/participants"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
+         android:layout_marginEnd="100dp"
          android:text="Participants"
          android:textSize="30sp"
          android:maxLength="15"
-         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintStart_toStartOf="@id/sujet"
+         app:layout_constraintTop_toTopOf="@id/sujet"
          app:layout_constraintBottom_toBottomOf="parent"
-         app:layout_constraintTop_toTopOf="@+id/sujet">
+         >
 
      </TextView>
 
@@ -108,11 +113,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="25dp"
         android:tint="#26DD2D"
         android:background="@null"
         android:src="@drawable/baseline_done_black_36"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
     </ImageButton>
