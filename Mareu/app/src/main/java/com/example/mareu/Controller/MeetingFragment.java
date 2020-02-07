@@ -1,29 +1,22 @@
 package com.example.mareu.Controller;
 
 
-import android.arch.lifecycle.Lifecycle;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.text.InputFilter;
-import android.text.Layout;
-import android.util.EventLog;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.mareu.Model.Meeting;
 import com.example.mareu.R;
-import com.example.mareu.Service.MeetingApiService;
 import com.example.mareu.Service.Meetings;
 import com.example.mareu.events.DeleteMeetingEvent;
 
@@ -131,5 +124,10 @@ public class MeetingFragment extends Fragment implements SearchView.OnQueryTextL
 
     }
 
-
+    //Détruit la liste à la rotation de l'écran
+    @Override
+    public void onDestroy() {
+        //myAdapter.clearList();
+        super.onDestroy();
+    }
 }

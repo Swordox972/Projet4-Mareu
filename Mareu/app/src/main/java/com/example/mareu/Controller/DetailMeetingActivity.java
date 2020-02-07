@@ -1,7 +1,7 @@
 package com.example.mareu.Controller;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -9,16 +9,20 @@ import android.widget.TextView;
 import com.example.mareu.Model.Meeting;
 import com.example.mareu.Model.Participant;
 import com.example.mareu.R;
-import com.example.mareu.Service.Meetings;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class DetailMeetingActivity extends AppCompatActivity {
     private TextView reunionDetail;
-    private List<Meeting> mMeetingList;
     Meeting mMeeting;
     ArrayAdapter<Participant> mArrayAdapter;
     private ListView mListView;
+    private SimpleDateFormat dateFormat;
+    private Date date;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +33,9 @@ public class DetailMeetingActivity extends AppCompatActivity {
 
         mMeeting = (Meeting) getIntent().getSerializableExtra("Meeting");
 
-        reunionDetail.setText("Reunion salle " + mMeeting.getMeetingRoom() + " à " + mMeeting.getMeetingHour()
-                + " au sujet de " + mMeeting.getMeetingTopic() + " avec: ");
+        reunionDetail.setText("Reunion salle " + mMeeting.getMeetingRoom() + " à " +
+                returnTimeFormat(mMeeting.getMeetingHour()) + " au sujet de " +
+                mMeeting.getMeetingTopic() + " avec: ");
 
         mListView = findViewById(R.id.listview_participant);
 
@@ -51,5 +56,16 @@ public class DetailMeetingActivity extends AppCompatActivity {
             mParticipantList.get(i).setNomParticipant(monParticipant);
         }
         return mParticipantList;
+    }
+
+    public String returnTimeFormat(String time) {
+        try {
+            dateFormat = new SimpleDateFormat("H:mm");
+            date = dateFormat.parse(time);
+        } catch (final ParseException e) {
+            e.printStackTrace();
+        }
+
+        return new SimpleDateFormat("H:mm").format(date);
     }
 }

@@ -5,7 +5,7 @@ import com.example.mareu.Model.Meeting;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Meetings implements Serializable{
+public class Meetings implements Serializable {
     private static final Meetings ourInstance = new Meetings();
     private ArrayList<Meeting> mMeetingList = new ArrayList<Meeting>();
 

@@ -11,7 +11,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
     </TimePicker>
 
@@ -23,7 +25,6 @@
         android:layout_marginBottom="15dp"
         android:text="save"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-    </Button>
+        app:layout_constraintBottom_toBottomOf="parent"></Button>
 
 </android.support.constraint.ConstraintLayout>

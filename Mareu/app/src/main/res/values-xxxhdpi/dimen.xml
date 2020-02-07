@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="size_meeting_descriptive_textview">17sp</dimen>
+    <dimen name="meeting_descriptive_marginstart">25dp</dimen>
+    <dimen name="imageView_size_fragment">50dp</dimen>
+    <dimen name="imageView_marginstart_fragment">22dp</dimen>
+    <dimen name="delete_button_marginend">15dp</dimen>
+    <dimen name="size_meeting_participant">15sp</dimen>
+
+    <dimen name="size_create_meeting_textview">35sp</dimen>
+
+    <dimen name="confirm_participant_marginstart">350dp</dimen>
+
+
+</resources>

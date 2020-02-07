@@ -16,6 +16,8 @@ public abstract class DummyMeetingGenerator {
 
     public static ArrayList<Participant> DUMMY_PARTICIPANT = new ArrayList<>();
 
-    static List<Participant> generateParticipantList() {return new ArrayList<>(DUMMY_PARTICIPANT);}
+    static List<Participant> generateParticipantList() {
+        return new ArrayList<>(DUMMY_PARTICIPANT);
+    }
 
 }

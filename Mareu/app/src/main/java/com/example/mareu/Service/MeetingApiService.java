@@ -3,7 +3,6 @@ package com.example.mareu.Service;
 import com.example.mareu.Model.Meeting;
 import com.example.mareu.Model.Participant;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface MeetingApiService {

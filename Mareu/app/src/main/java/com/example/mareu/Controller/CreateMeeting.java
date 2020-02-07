@@ -2,7 +2,6 @@ package com.example.mareu.Controller;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Telephony;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,15 +15,12 @@ import android.widget.Spinner;
 import com.example.mareu.Model.Meeting;
 import com.example.mareu.Model.Participant;
 import com.example.mareu.R;
-import com.example.mareu.Service.DummyMeetingGenerator;
-import com.example.mareu.Service.MeetingApiService;
 import com.example.mareu.Service.Meetings;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class CreateMeeting extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -56,7 +52,7 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
         confirmButtonClick();
 
         mTimePickerButton = findViewById(R.id.time_picker_button);
-           returnTimeFormat(time);
+        returnTimeFormat(time);
         mTimePickerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,7 +127,6 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
     }
 
 
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         parent.getItemAtPosition(position);
@@ -157,7 +152,7 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
                 time = data.getStringExtra("MEETING_TIME");
-                 returnTimeFormat(time);
+                returnTimeFormat(time);
             } else {
             }
         } else if (requestCode == 1) {

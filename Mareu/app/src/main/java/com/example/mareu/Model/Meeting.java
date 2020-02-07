@@ -1,12 +1,8 @@
 package com.example.mareu.Model;
 
-import android.provider.Telephony;
 import android.support.annotation.Nullable;
-import android.util.Range;
 
 import java.io.Serializable;
-import java.time.temporal.ValueRange;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -72,8 +68,8 @@ public class Meeting implements Serializable {
         }
 
         Meeting meeting = (Meeting) obj;
-        return Objects.equals(meetingRoom +  meetingHour+ meetingTopic+ meetingParticipants,
-                meeting.meetingRoom + meeting.meetingHour  + meeting.meetingTopic+ meeting.meetingParticipants);
+        return Objects.equals(meetingRoom + meetingHour + meetingTopic + meetingParticipants,
+                meeting.meetingRoom + meeting.meetingHour + meeting.meetingTopic + meeting.meetingParticipants);
     }
 
     @Override

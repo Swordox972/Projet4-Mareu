@@ -3,15 +3,12 @@ package com.example.mareu.Controller;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,13 +21,10 @@ import com.example.mareu.events.OpenMeetingEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,8 +36,6 @@ public class MyMeetingRecyclerViewAdapter extends
     private List<Meeting> mMeetingList;
     private SimpleDateFormat dateFormat;
     private Date date;
-    private List<String> colorSave = new ArrayList<>();
-    private int count;
 
 
     public MyMeetingRecyclerViewAdapter(Context context, List<Meeting> items) {
@@ -161,6 +153,12 @@ public class MyMeetingRecyclerViewAdapter extends
         notifyDataSetChanged();
 
     }
+
+    public void clearList() {
+        mMeetingList.clear();
+        notifyDataSetChanged();
+    }
+
 
 }
 
