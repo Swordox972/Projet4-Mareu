@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Salle: "
-        android:textSize="30sp"
+        android:textSize="@dimen/size_create_meeting_textview"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Heure"
-        android:textSize="30sp"
+        android:textSize="@dimen/size_create_meeting_textview"
         android:layout_marginTop="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/salle">
@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sujet"
-        android:textSize="30sp"
+        android:textSize="@dimen/size_create_meeting_textview"
         app:layout_constraintTop_toTopOf="@id/salle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -84,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Participants"
-        android:textSize="30sp"
+        android:textSize="@dimen/size_create_meeting_textview"
         android:maxLength="15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

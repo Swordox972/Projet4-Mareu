@@ -83,10 +83,12 @@
             android:id="@+id/confirm_participants_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="350dp"
+            android:layout_marginStart="@dimen/confirm_participant_marginstart"
             android:background="@null"
             android:src="@drawable/baseline_done_black_36"
-            android:tint="#26DD2D"></ImageButton>
+            android:tint="#26DD2D">
+
+        </ImageButton>
 
 
     </LinearLayout>
