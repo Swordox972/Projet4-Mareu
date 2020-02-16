@@ -4,6 +4,7 @@ package com.example.mareu.Controller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -34,8 +35,8 @@ public class ListParticipantsActivity extends AppCompatActivity {
 
         participantEditText();
 
-        addParticipant();
 
+        addParticipant();
 
         mConfirmParticipantButton = findViewById(R.id.confirm_participants_button);
 
@@ -59,7 +60,6 @@ public class ListParticipantsActivity extends AppCompatActivity {
     }
 
     public void addParticipant() {
-
         mAddParticipant = findViewById(R.id.add_more_participants);
         mAddParticipant.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,18 +67,22 @@ public class ListParticipantsActivity extends AppCompatActivity {
                 addParticipantClick();
             }
         });
+
     }
 
     public void addParticipantClick() {
+
         final EditText editText = new EditText(this);
         LinearLayout li = findViewById(R.id.linear_layout_participant);
         editText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
         editText.setHint("Participant" + participantCount++);
         editText.setPadding(20, 20, 20, 20);
+        if (mAddParticipant.getScaleX() == 1.5 && mAddParticipant.getScaleY() == 1.5) {
+            editText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 35);
+        }
         li.addView(editText);
         listParticipantAdditional.add(editText);
-
 
     }
 

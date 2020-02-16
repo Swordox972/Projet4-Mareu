@@ -10,6 +10,7 @@ public class Meeting implements Serializable {
     private char meetingRoom;
     private String meetingHour;
     private String meetingTopic;
+    private int meetingDuration;
     private List<Participant> meetingParticipants;
 
     // Constructeur par défault
@@ -17,9 +18,10 @@ public class Meeting implements Serializable {
     }
 
     //Constructeur avec paramètres
-    public Meeting(char meetingRoom, String meetingHour, String meetingTopic, List<Participant> meetingParticipants) {
+    public Meeting(char meetingRoom, String meetingHour, int meetingDuration, String meetingTopic, List<Participant> meetingParticipants) {
         this.meetingRoom = meetingRoom;
         this.meetingHour = meetingHour;
+        this.meetingDuration = meetingDuration;
         this.meetingTopic = meetingTopic;
         this.meetingParticipants = meetingParticipants;
     }
@@ -39,6 +41,10 @@ public class Meeting implements Serializable {
     public void setMeetingHour(String meetingHour) {
         this.meetingHour = meetingHour;
     }
+
+    public int getMeetingDuration() { return meetingDuration; }
+
+    public void setMeetingDuration(int meetingDuration) { this.meetingDuration = meetingDuration; }
 
     public String getMeetingTopic() {
         return meetingTopic;

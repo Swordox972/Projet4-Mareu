@@ -11,10 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.example.mareu.DI.DI;
 import com.example.mareu.Model.Meeting;
 import com.example.mareu.Model.Participant;
 import com.example.mareu.R;
+import com.example.mareu.Service.MeetingApiService;
 import com.example.mareu.Service.Meetings;
 
 import java.text.ParseException;
@@ -26,10 +29,12 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
 
     private Spinner mSpinnerRoomName;
     private ImageButton mConfirmButton;
+    private EditText mMeetingDuration;
     private EditText mMeetingSubject;
     private Button mTimePickerButton;
     private char mRoomSelected;
     private Button mParticipantsButton;
+    private MeetingApiService mApiService;
     ArrayList<Participant> meetingParticipantList = new ArrayList<>();
     SimpleDateFormat dateFormat;
     Date dateObj;
@@ -45,7 +50,11 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
+
         spinnerRoomName();
+
+        myMeetingDuration();
 
         meetingSubject();
 
@@ -83,10 +92,16 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
 
     public void participantsActivityIntent() {
         Intent mParticipantsIntent = new Intent(this, ListParticipantsActivity.class);
-        mParticipantsIntent.putParcelableArrayListExtra("ListParticipant", meetingParticipantList);
+        mParticipantsIntent.putParcelableArrayListExtra
+                ("ListParticipant", meetingParticipantList);
         startActivityForResult(mParticipantsIntent, 1);
     }
 
+    public void myMeetingDuration() {
+        mMeetingDuration = findViewById(R.id.durée_edit_text);
+        mMeetingDuration.setHint("Tapez la durée estimée de la réunion");
+
+    }
 
     public void meetingSubject() {
         mMeetingSubject = findViewById(R.id.meeting_subject);
@@ -98,18 +113,34 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
     public void confirmButtonClick() {
         mConfirmButton = findViewById(R.id.confirm_button);
 
+        mApiService = DI.getMeetingApiService();
+
         mConfirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 mRoomSelected = mSpinnerRoomName.getSelectedItem().toString().charAt(0);
 
+
                 mMeeting = new Meeting(mRoomSelected, time,
+                        Integer.parseInt(mMeetingDuration.getText().toString()),
                         mMeetingSubject.getText().toString(), meetingParticipantList);
 
+                if (mApiService.verifyMeetingHourDisponibility(Meetings.getInstance()
+                        .getMeetingList(), mMeeting) && mApiService
+                        .verifyMeetingDurationHasValue(mMeeting) &&
+                        mApiService.verifyMeetingTopicIsEmpty(mMeeting) == false) {
+                    Meetings.getInstance().getMeetingList().add(mMeeting);
+                    finish();
+                } else {
+                    Toast myToast = Toast.makeText(getApplicationContext(),
+                            "Reunion incorrecte, vérifiez que vous avez rempli les champs " +
+                                    "correctement"
+                            , Toast.LENGTH_SHORT);
+                    myToast.show();
+                }
 
-                Meetings.getInstance().getMeetingList().add(mMeeting);
-                finish();
+
             }
         });
     }

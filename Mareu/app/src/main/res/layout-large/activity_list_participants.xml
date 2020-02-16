@@ -2,6 +2,7 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/large_participantslist"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -17,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:textSize="20sp">
+            android:textSize="35sp">
 
         </EditText>
 
@@ -27,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:textSize="20sp">
+            android:textSize="35sp">
 
         </EditText>
 
@@ -37,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:textSize="20sp">
+            android:textSize="35sp">
 
 
         </EditText>
@@ -51,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ajouter d'autres participants"
-                android:textSize="20sp">
+                android:textSize="35sp">
 
             </TextView>
 
@@ -62,7 +63,9 @@
                 android:layout_marginStart="10dp"
                 android:background="@null"
                 android:src="@drawable/baseline_add_black_36"
-                android:tint="#F06A97">
+                android:tint="#F06A97"
+                android:scaleX="1.5"
+                android:scaleY="1.5">
 
             </ImageButton>
 
@@ -86,7 +89,9 @@
             android:layout_marginStart="@dimen/confirm_participant_marginstart"
             android:background="@null"
             android:src="@drawable/baseline_done_black_36"
-            android:tint="#26DD2D">
+            android:tint="#26DD2D"
+            android:scaleX="1.5"
+            android:scaleY="1.5">
 
         </ImageButton>
 

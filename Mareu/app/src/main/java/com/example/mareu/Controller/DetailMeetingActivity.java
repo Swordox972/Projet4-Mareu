@@ -34,13 +34,13 @@ public class DetailMeetingActivity extends AppCompatActivity {
         mMeeting = (Meeting) getIntent().getSerializableExtra("Meeting");
 
         reunionDetail.setText("Reunion salle " + mMeeting.getMeetingRoom() + " à " +
-                returnTimeFormat(mMeeting.getMeetingHour()) + " au sujet de " +
-                mMeeting.getMeetingTopic() + " avec: ");
+                returnTimeFormat(mMeeting.getMeetingHour()) + " d'une durée de "+ mMeeting.getMeetingDuration()+
+                " minutes "+" au sujet de " + mMeeting.getMeetingTopic() + " avec: ");
 
         mListView = findViewById(R.id.listview_participant);
 
         mArrayAdapter = new ArrayAdapter<Participant>(this, R.layout.activity_detail_listparticipant,
-                R.id.detail_participant_textview, returnparticipantWithEmail(
+                R.id.detail_participant_textview, returnParticipantWithEmail(
                 mMeeting.getMeetingParticipants()));
 
         mListView.setAdapter(mArrayAdapter);
@@ -50,7 +50,7 @@ public class DetailMeetingActivity extends AppCompatActivity {
         }
     }
 
-    private List<Participant> returnparticipantWithEmail(List<Participant> mParticipantList) {
+    private List<Participant> returnParticipantWithEmail(List<Participant> mParticipantList) {
         for (int i = 0; i < mParticipantList.size(); i++) {
             String monParticipant = mParticipantList.get(i).getNomParticipant() + "@lamzone.com";
             mParticipantList.get(i).setNomParticipant(monParticipant);

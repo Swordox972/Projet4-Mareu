@@ -22,6 +22,9 @@
         android:id="@+id/my_spinner_room"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:scaleX="2.0"
+        android:scaleY="2.0"
+        android:layout_marginStart="30dp"
         app:layout_constraintStart_toEndOf="@id/salle"
         app:layout_constraintTop_toTopOf="@id/salle"
         app:layout_constraintBottom_toBottomOf="@id/salle">
@@ -37,7 +40,8 @@
         android:textSize="@dimen/size_create_meeting_textview"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/salle">
+        app:layout_constraintTop_toBottomOf="@id/salle"
+        app:layout_constraintBottom_toTopOf="@id/durée">
 
     </TextView>
 
@@ -45,6 +49,9 @@
         android:id="@+id/time_picker_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:layout_marginStart="30dp"
         app:layout_constraintStart_toEndOf="@id/heure"
         app:layout_constraintBottom_toBottomOf="@id/heure"
         app:layout_constraintTop_toTopOf="@id/heure">
@@ -52,15 +59,39 @@
     </Button>
 
     <TextView
+        android:id="@+id/durée"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:text="Durée"
+        android:textSize="@dimen/size_create_meeting_textview"
+        app:layout_constraintTop_toBottomOf="@id/heure"
+        app:layout_constraintBottom_toTopOf="@id/sujet"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </TextView>
+
+    <EditText
+        android:id="@+id/durée_edit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@id/durée"
+        app:layout_constraintBottom_toBottomOf="@id/durée">
+
+    </EditText>
+
+    <TextView
         android:id="@+id/sujet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sujet"
         android:textSize="@dimen/size_create_meeting_textview"
-        android:layout_marginTop="30dp"
-        app:layout_constraintTop_toTopOf="@id/heure"
+        app:layout_constraintTop_toTopOf="@id/durée"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="@id/participants">
 
     </TextView>
 
@@ -68,7 +99,7 @@
         android:id="@+id/meeting_subject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:inputType="text"
         app:layout_constraintStart_toEndOf="@+id/sujet"
@@ -96,6 +127,9 @@
         android:id="@+id/participants_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:layout_marginStart="30dp"
         app:layout_constraintTop_toTopOf="@+id/participants"
         app:layout_constraintStart_toEndOf="@+id/participants"
         app:layout_constraintBottom_toBottomOf="@+id/participants">
@@ -107,11 +141,13 @@
         android:contentDescription="boutton vers time spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="25dp"
         android:tint="#26DD2D"
         android:background="@null"
         android:src="@drawable/baseline_done_black_36"
+        android:scaleX="2.0"
+        android:scaleY="2.0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 

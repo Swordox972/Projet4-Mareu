@@ -6,12 +6,14 @@ import com.example.mareu.Model.Participant;
 import java.util.List;
 
 public interface MeetingApiService {
-    List<Meeting> getMeeting();
 
-    void deleteMeeting(Meeting meeting);
+    boolean verifyMeetingHourDisponibility(List<Meeting> meetingList, Meeting meeting);
+
+    boolean verifyMeetingDurationHasValue(Meeting meeting);
+
+    boolean verifyMeetingTopicIsEmpty(Meeting meeting);
+
+    boolean verifyMeetingParticipantsIsEmpty(Participant participant);
 
 
-    List<Participant> getParticipants();
-
-    void deleteParticipant(Participant participant);
 }

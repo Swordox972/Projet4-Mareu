@@ -2,10 +2,8 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="300dp"
-    android:layout_height="300dp"
-    android:layout_marginTop="50dp"
-    android:layout_marginStart="35dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context=".Controller.CreateMeeting">
 
 
@@ -52,6 +50,31 @@
         app:layout_constraintTop_toTopOf="@id/heure">
 
     </Button>
+
+    <TextView
+        android:id="@+id/durée"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:text="Durée"
+        android:textSize="@dimen/size_create_meeting_textview"
+        app:layout_constraintTop_toBottomOf="@id/heure"
+        app:layout_constraintBottom_toTopOf="@id/sujet"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </TextView>
+
+    <EditText
+        android:id="@+id/durée_edit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@id/durée"
+        app:layout_constraintBottom_toBottomOf="@id/durée">
+
+    </EditText>
 
     <TextView
         android:id="@+id/sujet"
