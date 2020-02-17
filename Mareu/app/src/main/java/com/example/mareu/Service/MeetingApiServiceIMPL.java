@@ -26,6 +26,8 @@ public class MeetingApiServiceIMPL implements MeetingApiService {
 
         boolean disponibility = true;
 
+        char newMeetingRoom = newMeeting.getMeetingRoom();
+
         String meetingHour = newMeeting.getMeetingHour();
 
         int newMeetingStartTime = convertHourToMinute(meetingHour);
@@ -36,14 +38,17 @@ public class MeetingApiServiceIMPL implements MeetingApiService {
 
 
         for (Meeting oldMeeting : meetingList) {
+            char oldMeetingRoom = oldMeeting.getMeetingRoom();
+
             String oldMeetingHour = oldMeeting.getMeetingHour();
 
             int oldMeetingStartTime = convertHourToMinute(oldMeetingHour);
             int oldMeetingEndTime = oldMeetingStartTime + oldMeeting.getMeetingDuration();
 
-            if ((oldMeetingStartTime <= newMeetingStartTime && newMeetingStartTime <=
-                    oldMeetingEndTime) || (newMeetingEndTime >= oldMeetingStartTime &&
-                    newMeetingEndTime <= oldMeetingEndTime)) {
+            if ((oldMeetingRoom == newMeetingRoom && oldMeetingStartTime <= newMeetingStartTime &&
+                    newMeetingStartTime <= oldMeetingEndTime) ||
+                    (oldMeetingRoom == newMeetingRoom && newMeetingEndTime >= oldMeetingStartTime
+                            && newMeetingEndTime <= oldMeetingEndTime)) {
                 disponibility = false;
                 break;
             }

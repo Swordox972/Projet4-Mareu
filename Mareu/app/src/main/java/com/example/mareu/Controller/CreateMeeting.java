@@ -128,15 +128,9 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
                             Integer.parseInt(mMeetingDuration.getText().toString()),
                             mMeetingSubject.getText().toString(), meetingParticipantList);
                 } catch (NumberFormatException e) {
-                    empty = true;
                     Log.e("Log_durée_empty", "Durée vide");
                 }
 
-                if (empty) {
-                    Toast myToast = Toast.makeText(getApplicationContext(), "Durée vide ou incorrect",
-                            Toast.LENGTH_SHORT);
-                    myToast.show();
-                }
                 try {
 
                     if (mApiService.verifyMeetingHourDisponibility(Meetings.getInstance()
@@ -148,14 +142,14 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
                         finish();
                     } else {
                         Toast myToast = Toast.makeText(getApplicationContext(),
-                                "Reunion incorrecte, vérifiez que vous avez rempli les champs " +
-                                        "correctement"
+                                "Reunion incorrecte, vérifiez que vous avez rempli les " +
+                                        "champs correctement ou que l'heure de début et " +
+                                        "l'heure de fin d'une autre réunion ne se confronte pas" +
+                                        " à une autre réunion en fonction de la salle"
                                 , Toast.LENGTH_SHORT);
                         myToast.show();
                     }
                 } catch (NullPointerException npe) {
-                    Toast.makeText(getApplicationContext(),
-                            "Format incorrect", Toast.LENGTH_SHORT);
                 }
 
 

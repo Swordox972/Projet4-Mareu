@@ -17,7 +17,7 @@ public class MeetingApiServiceIMPLTest {
         Meeting meeting = new Meeting('A', "15:45", 45,
                 "Lol", new ArrayList<Participant>());
 
-        assert mApiService.verifyMeetingHourDisponibility(meetingList, meeting) == true;
+        assert mApiService.verifyMeetingHourDisponibility(meetingList, meeting);
 
     }
 
@@ -38,45 +38,45 @@ public class MeetingApiServiceIMPLTest {
 
         meetingList.add(oldMeeting);
 
-        assert mApiService.verifyMeetingHourDisponibility(meetingList, newMeeting) == true &&
-                mApiService.verifyMeetingHourDisponibility(meetingList, newMeeting1)== false;
+        assert mApiService.verifyMeetingHourDisponibility(meetingList, newMeeting) &&
+                !mApiService.verifyMeetingHourDisponibility(meetingList, newMeeting1);
 
     }
 
 
     @Test
     public void verifyMeetingDurationHasValue() {
-        Meeting meeting= new Meeting('E', "00:00", 0,
+        Meeting meeting = new Meeting('E', "00:00", 0,
                 "lol", new ArrayList<Participant>());
 
-        Meeting meeting1= new Meeting('E', "00:00", 45,
+        Meeting meeting1 = new Meeting('E', "00:00", 45,
                 "lol", new ArrayList<Participant>());
 
 
-        assert mApiService.verifyMeetingDurationHasValue(meeting)== false &&
-                mApiService.verifyMeetingDurationHasValue(meeting1) == true;
+        assert !mApiService.verifyMeetingDurationHasValue(meeting) &&
+                mApiService.verifyMeetingDurationHasValue(meeting1);
 
 
     }
 
     @Test
-    public void verifyMeetingTopicIsEmpty()
-     {Meeting meeting = new Meeting('F', "15:00", 30,
-             "Lol", new ArrayList<Participant>());
+    public void verifyMeetingTopicIsEmpty() {
+        Meeting meeting = new Meeting('F', "15:00", 30,
+                "Lol", new ArrayList<Participant>());
 
-         Meeting meeting1 = new Meeting('F', "15:00", 30,
-                 "", new ArrayList<Participant>());
+        Meeting meeting1 = new Meeting('F', "15:00", 30,
+                "", new ArrayList<Participant>());
 
-     assert mApiService.verifyMeetingTopicIsEmpty(meeting)== false &&
-             mApiService.verifyMeetingTopicIsEmpty(meeting1)== true;
+        assert !mApiService.verifyMeetingTopicIsEmpty(meeting) &&
+                mApiService.verifyMeetingTopicIsEmpty(meeting1);
     }
 
     @Test
     public void verifyMeetingParticipantsIsNull() {
-        Participant participant= new Participant("");
-        Participant participant1= new Participant("François");
+        Participant participant = new Participant("");
+        Participant participant1 = new Participant("François");
 
-        assert mApiService.verifyMeetingParticipantsIsEmpty(participant)==true &&
-                mApiService.verifyMeetingParticipantsIsEmpty(participant1)== false;
+        assert mApiService.verifyMeetingParticipantsIsEmpty(participant) &&
+                !mApiService.verifyMeetingParticipantsIsEmpty(participant1);
     }
 }
