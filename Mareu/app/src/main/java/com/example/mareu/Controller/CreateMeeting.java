@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -35,6 +36,7 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
     private char mRoomSelected;
     private Button mParticipantsButton;
     private MeetingApiService mApiService;
+    private boolean empty;
     ArrayList<Participant> meetingParticipantList = new ArrayList<>();
     SimpleDateFormat dateFormat;
     Date dateObj;
@@ -121,23 +123,39 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
 
                 mRoomSelected = mSpinnerRoomName.getSelectedItem().toString().charAt(0);
 
+                try {
+                    mMeeting = new Meeting(mRoomSelected, time,
+                            Integer.parseInt(mMeetingDuration.getText().toString()),
+                            mMeetingSubject.getText().toString(), meetingParticipantList);
+                } catch (NumberFormatException e) {
+                    empty = true;
+                    Log.e("Log_durée_empty", "Durée vide");
+                }
 
-                mMeeting = new Meeting(mRoomSelected, time,
-                        Integer.parseInt(mMeetingDuration.getText().toString()),
-                        mMeetingSubject.getText().toString(), meetingParticipantList);
-
-                if (mApiService.verifyMeetingHourDisponibility(Meetings.getInstance()
-                        .getMeetingList(), mMeeting) && mApiService
-                        .verifyMeetingDurationHasValue(mMeeting) &&
-                        mApiService.verifyMeetingTopicIsEmpty(mMeeting) == false) {
-                    Meetings.getInstance().getMeetingList().add(mMeeting);
-                    finish();
-                } else {
-                    Toast myToast = Toast.makeText(getApplicationContext(),
-                            "Reunion incorrecte, vérifiez que vous avez rempli les champs " +
-                                    "correctement"
-                            , Toast.LENGTH_SHORT);
+                if (empty) {
+                    Toast myToast = Toast.makeText(getApplicationContext(), "Durée vide ou incorrect",
+                            Toast.LENGTH_SHORT);
                     myToast.show();
+                }
+                try {
+
+                    if (mApiService.verifyMeetingHourDisponibility(Meetings.getInstance()
+                            .getMeetingList(), mMeeting) && mApiService
+                            .verifyMeetingDurationHasValue(mMeeting) &&
+                            !mApiService.verifyMeetingTopicIsEmpty(mMeeting)
+                            && !meetingParticipantList.isEmpty()) {
+                        Meetings.getInstance().getMeetingList().add(mMeeting);
+                        finish();
+                    } else {
+                        Toast myToast = Toast.makeText(getApplicationContext(),
+                                "Reunion incorrecte, vérifiez que vous avez rempli les champs " +
+                                        "correctement"
+                                , Toast.LENGTH_SHORT);
+                        myToast.show();
+                    }
+                } catch (NullPointerException npe) {
+                    Toast.makeText(getApplicationContext(),
+                            "Format incorrect", Toast.LENGTH_SHORT);
                 }
 
 

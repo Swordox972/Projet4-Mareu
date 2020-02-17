@@ -10,9 +10,12 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.example.mareu.DI.DI;
 import com.example.mareu.Model.Participant;
 import com.example.mareu.R;
+import com.example.mareu.Service.MeetingApiService;
 
 import java.util.ArrayList;
 
@@ -25,7 +28,7 @@ public class ListParticipantsActivity extends AppCompatActivity {
     private ArrayList<Participant> listParticipant;
     private int participantCount = 4;
     private ArrayList<EditText> listParticipantAdditional = new ArrayList<>();
-
+    private MeetingApiService mApiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +38,6 @@ public class ListParticipantsActivity extends AppCompatActivity {
 
         participantEditText();
 
-
         addParticipant();
 
         mConfirmParticipantButton = findViewById(R.id.confirm_participants_button);
@@ -44,8 +46,7 @@ public class ListParticipantsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 participantList();
-                confirmParticipantButton();
-                finish();
+
             }
         });
     }
@@ -55,7 +56,7 @@ public class ListParticipantsActivity extends AppCompatActivity {
         Intent myIntent = new Intent();
         myIntent.putParcelableArrayListExtra("ListParticipant", listParticipant);
         setResult(RESULT_OK, myIntent);
-
+        finish();
 
     }
 
@@ -95,21 +96,39 @@ public class ListParticipantsActivity extends AppCompatActivity {
         listParticipant.add(participant2);
         listParticipant.add(participant3);
 
-        if (mParticipant1.getText().toString().isEmpty()) {
+        mApiService = DI.getMeetingApiService();
+
+        if (mApiService.verifyMeetingParticipantsIsEmpty(participant1) ||
+                mApiService.verifyMeetingParticipantsIsEmpty(participant2)) {
             listParticipant.remove(participant1);
-        }
-        if (mParticipant2.getText().toString().isEmpty()) {
             listParticipant.remove(participant2);
-        }
-        if (mParticipant3.getText().toString().isEmpty()) {
             listParticipant.remove(participant3);
-        }
+
+            Toast myToast = Toast.makeText(getApplicationContext(), "Le participant 1 ou 2 " +
+                    "est vide", Toast.LENGTH_SHORT);
+            myToast.show();
 
 
-        for (int i = 0; i < listParticipantAdditional.size(); i++) {
-            EditText editText = listParticipantAdditional.get(i);
-            Participant participantAdditionnal = new Participant(editText.getText().toString());
-            listParticipant.add(participantAdditionnal);
+        } else {
+
+            if (mParticipant3.getText().toString().isEmpty()) {
+                listParticipant.remove(participant3);
+            }
+
+
+            for (int i = 0; i < listParticipantAdditional.size(); i++) {
+                EditText editText = listParticipantAdditional.get(i);
+                Participant participantAdditionnal = new Participant(editText.getText().toString());
+                if (!mApiService.verifyMeetingParticipantsIsEmpty(participantAdditionnal)) {
+                    listParticipant.add(participantAdditionnal);
+                } else {
+                    listParticipantAdditional.remove(participantAdditionnal);
+                }
+
+            }
+
+            confirmParticipantButton();
+
         }
     }
 
