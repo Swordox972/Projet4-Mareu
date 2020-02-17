@@ -36,7 +36,7 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
     private char mRoomSelected;
     private Button mParticipantsButton;
     private MeetingApiService mApiService;
-    private boolean empty;
+    boolean empty;
     ArrayList<Participant> meetingParticipantList = new ArrayList<>();
     SimpleDateFormat dateFormat;
     Date dateObj;
@@ -60,7 +60,6 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
 
         meetingSubject();
 
-        confirmButtonClick();
 
         mTimePickerButton = findViewById(R.id.time_picker_button);
         returnTimeFormat(time);
@@ -72,12 +71,15 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
         });
 
         mParticipantsButton = findViewById(R.id.participants_button);
+        mParticipantsButton.setText("Vide");
         mParticipantsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 participantsActivityIntent();
             }
         });
+
+        confirmButtonClick();
 
     }
 
@@ -128,7 +130,15 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
                             Integer.parseInt(mMeetingDuration.getText().toString()),
                             mMeetingSubject.getText().toString(), meetingParticipantList);
                 } catch (NumberFormatException e) {
+                    empty = true;
                     Log.e("Log_durée_empty", "Durée vide");
+                }
+
+                if (empty && mMeetingDuration.getText().toString().isEmpty()) {
+                    Toast myToast = Toast.makeText(getApplicationContext(), "durée invalide"
+                            , Toast.LENGTH_SHORT);
+
+                    myToast.show();
                 }
 
                 try {
@@ -155,6 +165,7 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
 
             }
         });
+
     }
 
     public void spinnerRoomName() {

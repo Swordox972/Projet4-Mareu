@@ -2,9 +2,9 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="350dp"
-    android:layout_height="450dp"
-    android:layout_marginTop="100dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
     tools:context=".Controller.CreateMeeting">
 
 
@@ -110,7 +110,6 @@
         android:layout_height="wrap_content"
         android:text="Participants"
         android:textSize="@dimen/size_create_meeting_textview"
-        android:maxLength="15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@+id/sujet">

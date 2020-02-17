@@ -29,6 +29,8 @@
         android:scaleX="1.5"
         android:scaleY="1.5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"></Button>
+        app:layout_constraintBottom_toBottomOf="parent">
+
+    </Button>
 
 </android.support.constraint.ConstraintLayout>

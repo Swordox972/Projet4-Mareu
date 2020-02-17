@@ -75,12 +75,12 @@ public class ListParticipantsActivity extends AppCompatActivity {
 
         final EditText editText = new EditText(this);
         LinearLayout li = findViewById(R.id.linear_layout_participant);
-        editText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+        editText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
         editText.setHint("Participant" + participantCount++);
         editText.setPadding(20, 20, 20, 20);
         if (mAddParticipant.getScaleX() == 1.5 && mAddParticipant.getScaleY() == 1.5) {
-            editText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 35);
+            editText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
         }
         li.addView(editText);
         listParticipantAdditional.add(editText);

@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:textSize="20sp">
+            android:textSize="30sp">
 
         </EditText>
 
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:textSize="20sp">
+            android:textSize="30sp">
 
         </EditText>
 
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:textSize="20sp">
+            android:textSize="30sp">
 
 
         </EditText>
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ajouter d'autres participants"
-                android:textSize="20sp">
+                android:textSize="30sp">
 
             </TextView>
 
@@ -61,6 +61,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:background="@null"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
                 android:src="@drawable/baseline_add_black_36"
                 android:tint="#F06A97">
 
@@ -83,8 +85,11 @@
             android:id="@+id/confirm_participants_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/confirm_participant_marginstart"
+            android:layout_marginStart="500dp"
+            android:layout_marginTop="30dp"
             android:background="@null"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
             android:src="@drawable/baseline_done_black_36"
             android:tint="#26DD2D">
 

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Controller.DetailMeetingActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".Controller.DetailMeetingActivity">
 
     <TextView
         android:id="@+id/meeting_detail"
@@ -13,9 +13,11 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"></TextView>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </TextView>
 
     <ListView
         android:id="@+id/listview_participant"
@@ -23,5 +25,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
         android:divider="#2196F3"
-        android:dividerHeight="1dp"></ListView>
+        android:dividerHeight="1dp">
+
+    </ListView>
 </LinearLayout>

@@ -7,7 +7,7 @@
     <dimen name="delete_button_marginend">7dp</dimen>
     <dimen name="size_meeting_participant">13sp</dimen>
 
-    <dimen name="size_create_meeting_textview">25sp</dimen>
+    <dimen name="size_create_meeting_textview">23sp</dimen>
 
     <dimen name="confirm_participant_marginstart">220dp</dimen>
 
