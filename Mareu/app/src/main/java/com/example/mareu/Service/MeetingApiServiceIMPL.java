@@ -9,7 +9,10 @@ public class MeetingApiServiceIMPL implements MeetingApiService {
 
 
     private int convertHourToMinute(String time) {
+
+
         int hour = Integer.parseInt(time.substring(0, 2));
+
 
         int convertHourToMinute = hour * 60;
 
@@ -18,6 +21,8 @@ public class MeetingApiServiceIMPL implements MeetingApiService {
         int finalTimeInMinute = convertHourToMinute + minute;
 
         return finalTimeInMinute;
+
+
     }
 
 

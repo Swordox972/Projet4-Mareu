@@ -33,9 +33,9 @@ public class DetailMeetingActivity extends AppCompatActivity {
 
         mMeeting = (Meeting) getIntent().getSerializableExtra("Meeting");
 
-        reunionDetail.setText("Reunion salle " + mMeeting.getMeetingRoom() + " à " +
+        reunionDetail.setText("Réunion salle " + mMeeting.getMeetingRoom() + " à " +
                 returnTimeFormat(mMeeting.getMeetingHour()) + " d'une durée de "+ mMeeting.getMeetingDuration()+
-                " minutes "+" au sujet de " + mMeeting.getMeetingTopic() + " avec: ");
+                " minutes "+"au sujet de " + mMeeting.getMeetingTopic() + " avec:");
 
         mListView = findViewById(R.id.listview_participant);
 
