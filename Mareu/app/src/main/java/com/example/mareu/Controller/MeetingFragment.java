@@ -33,7 +33,6 @@ public class MeetingFragment extends Fragment implements SearchView.OnQueryTextL
 
     private RecyclerView mRecyclerView;
     private List<Meeting> mMeetingList;
-    private List<Meeting> mFilteredList;
     private MyMeetingRecyclerViewAdapter myAdapter;
 
 

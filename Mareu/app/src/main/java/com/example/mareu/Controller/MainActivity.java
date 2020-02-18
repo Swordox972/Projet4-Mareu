@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
     public void onOpenMeeting(OpenMeetingEvent event) {
         Meeting meeting = event.meeting;
         if (meeting != null) {
-            startActivity(new Intent(this, DetailMeetingActivity.class).putExtra("Meeting",
-                    meeting));
+            startActivity(new Intent(this, DetailMeetingActivity.class)
+                    .putExtra("Meeting", meeting));
         }
     }
 
