@@ -17,12 +17,14 @@ public class MeetingApiServiceIMPLTest {
         Meeting meeting = new Meeting('A', "15:45", 45,
                 "Lol", new ArrayList<Participant>());
 
-        assert mApiService.verifyMeetingHourDisponibility(meetingList, meeting);
+        mApiService.verifyMeetingHourDisponibility(meetingList, meeting);
 
     }
 
     @Test
+
     public void verifyMeetingHourDisponibility() {
+
         List<Meeting> meetingList = new ArrayList<>();
 
 
@@ -33,13 +35,13 @@ public class MeetingApiServiceIMPLTest {
         Meeting newMeeting = new Meeting('B', "16:31", 45,
                 "Lol", new ArrayList<Participant>());
 
-        Meeting newMeeting1 = new Meeting('B', "15:01", 45,
+        Meeting newMeeting1 = new Meeting('A', "15:01", 45,
                 "Lol", new ArrayList<Participant>());
 
         meetingList.add(oldMeeting);
 
-        assert mApiService.verifyMeetingHourDisponibility(meetingList, newMeeting) &&
-                !mApiService.verifyMeetingHourDisponibility(meetingList, newMeeting1);
+        assert mApiService.verifyMeetingHourDisponibility(meetingList, newMeeting);
+        assert !mApiService.verifyMeetingHourDisponibility(meetingList, newMeeting1);
 
     }
 

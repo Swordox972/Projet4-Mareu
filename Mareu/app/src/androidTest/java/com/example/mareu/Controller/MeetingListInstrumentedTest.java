@@ -1,6 +1,8 @@
 package com.example.mareu.Controller;
 
 import android.os.SystemClock;
+import android.support.test.espresso.Espresso;
+import android.support.test.espresso.NoActivityResumedException;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.intent.Intents;
 import android.support.test.espresso.matcher.ViewMatchers;
@@ -22,6 +24,7 @@ import java.util.List;
 
 import static android.support.test.espresso.Espresso.closeSoftKeyboard;
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -33,6 +36,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.example.mareu.utils.AtPosition.atPosition;
 import static org.hamcrest.core.IsNull.notNullValue;
+import static org.junit.Assert.fail;
 
 public class MeetingListInstrumentedTest {
 
@@ -114,7 +118,7 @@ public class MeetingListInstrumentedTest {
     }
 
     @Test
-    public void myMeetingListFilter() {
+    public void myMeetingListFilterWithRoom() {
         myFakeMeetingCreationTest();
         Participant participant = new Participant("Carole");
         Participant participant1 = new Participant("k");
@@ -141,7 +145,40 @@ public class MeetingListInstrumentedTest {
                 R.id.meeting_descriptive)).check(matches(withText
                 ("Réunion D - 12:01 - Princesse Peach")));
 
+        Meetings.getInstance().getMeetingList().clear();
+
     }
 
 
+    @Test
+    public void myMeetingListFilterWithHour() {
+        myFakeMeetingCreationTest();
+        Participant participant = new Participant("Carole");
+        Participant participant1 = new Participant("k");
+
+        List<Participant> participantList = new ArrayList<>();
+        participantList.add(participant);
+        participantList.add(participant1);
+
+        Meeting meeting = new Meeting('D', "12:01", 45,
+                "Princesse Peach", participantList);
+        Meetings.getInstance().getMeetingList().add(meeting);
+
+        SystemClock.sleep(1000);
+        onView(withId(R.id.app_bar_search)).perform(click());
+        SystemClock.sleep(1000);
+        onView(withId(android.support.design.R.id.search_src_text)).
+                perform(typeText("12"));
+        SystemClock.sleep(1000);
+
+        closeSoftKeyboard();
+
+        SystemClock.sleep(1000);
+        onView(new RecyclerViewMatcher(R.id.meeting_fragment).atPositionOnView(0,
+                R.id.meeting_descriptive)).check(matches(withText
+                ("Réunion D - 12:01 - Princesse Peach")));
+
+       Meetings.getInstance().getMeetingList().clear();
+
+    }
 }
