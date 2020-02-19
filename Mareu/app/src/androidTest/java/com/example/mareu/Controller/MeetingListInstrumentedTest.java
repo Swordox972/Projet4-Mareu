@@ -118,7 +118,7 @@ public class MeetingListInstrumentedTest {
         Intents.init();
         SystemClock.sleep(1000);
         onView(withId(R.id.meeting_fab)).perform(click());
-          intended(hasComponent(CreateMeeting.class.getName()));
+        intended(hasComponent(CreateMeeting.class.getName()));
 
         onView(withId(R.id.my_spinner_room)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("B"))).perform(click());

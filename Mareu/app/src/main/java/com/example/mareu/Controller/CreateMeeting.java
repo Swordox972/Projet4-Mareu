@@ -156,7 +156,7 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
                                         "champs correctement ou que l'heure de début et " +
                                         "l'heure de fin d'une autre réunion ne se confronte pas" +
                                         " à une autre réunion en fonction de la salle"
-                                , Toast.LENGTH_SHORT);
+                                , Toast.LENGTH_LONG);
                         myToast.show();
                     }
                 } catch (NullPointerException npe) {

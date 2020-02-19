@@ -42,9 +42,13 @@ public class Meeting implements Serializable {
         this.meetingHour = meetingHour;
     }
 
-    public int getMeetingDuration() { return meetingDuration; }
+    public int getMeetingDuration() {
+        return meetingDuration;
+    }
 
-    public void setMeetingDuration(int meetingDuration) { this.meetingDuration = meetingDuration; }
+    public void setMeetingDuration(int meetingDuration) {
+        this.meetingDuration = meetingDuration;
+    }
 
     public String getMeetingTopic() {
         return meetingTopic;

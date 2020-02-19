@@ -41,6 +41,7 @@ public class TimePickerActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressWarnings("deprecation")
     public void ReturnHour() {
         try {
             Intent intent = new Intent();

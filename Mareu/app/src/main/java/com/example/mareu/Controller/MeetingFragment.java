@@ -23,8 +23,9 @@ import com.example.mareu.events.DeleteMeetingEvent;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.mareu.Service.MeetingFilterList.meetingFilterList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -106,27 +107,19 @@ public class MeetingFragment extends Fragment implements SearchView.OnQueryTextL
 
     @Override
     public boolean onQueryTextChange(String s) {
-        String userInput = s.toLowerCase();
+        List<Meeting> myFilteredList = meetingFilterList(mMeetingList, s);
 
-        List<Meeting> newList = new ArrayList<>();
-        for (Meeting meeting : mMeetingList) {
-            String meetingRoom = Character.toString(meeting.getMeetingRoom());
-            String meetingHour = String.valueOf(meeting.getMeetingHour());
-            if (meetingRoom.toLowerCase().contains(userInput) ||
-                    meetingHour.contains(userInput)) {
-                newList.add(meeting);
-            }
-        }
 
-        myAdapter.updateList(newList);
+        myAdapter.updateList(myFilteredList);
         return true;
 
     }
 
+
     //Détruit la liste à la rotation de l'écran
     @Override
     public void onDestroy() {
-        //myAdapter.clearList();
+        myAdapter.clearList();
         super.onDestroy();
     }
 }

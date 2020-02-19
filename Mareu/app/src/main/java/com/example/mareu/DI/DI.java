@@ -1,7 +1,7 @@
 package com.example.mareu.DI;
 
-import com.example.mareu.Service.MeetingApiServiceIMPL;
 import com.example.mareu.Service.MeetingApiService;
+import com.example.mareu.Service.MeetingApiServiceIMPL;
 
 public class DI {
 

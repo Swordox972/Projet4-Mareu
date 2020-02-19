@@ -8,27 +8,27 @@ import org.hamcrest.Matcher;
 
 
 public class AtPosition {
-        public static Matcher<View> atPosition(final int position, final Matcher<View> matcher) {
-            return new BaseMatcher<View>() {
-                int counter = 0;
+    public static Matcher<View> atPosition(final int position, final Matcher<View> matcher) {
+        return new BaseMatcher<View>() {
+            int counter = 0;
 
-                @Override
-                public boolean matches(final Object item) {
-                    if (matcher.matches(item)) {
-                        if (counter == position) {
-                            counter++;
-                            return true;
-                        }
+            @Override
+            public boolean matches(final Object item) {
+                if (matcher.matches(item)) {
+                    if (counter == position) {
                         counter++;
+                        return true;
                     }
-                    return false;
+                    counter++;
                 }
+                return false;
+            }
 
-                @Override
-                public void describeTo(final Description description) {
-                    description.appendText("Element at hierarchy position " + position);
-                }
-            };
-        }
+            @Override
+            public void describeTo(final Description description) {
+                description.appendText("Element at hierarchy position " + position);
+            }
+        };
     }
+}
 

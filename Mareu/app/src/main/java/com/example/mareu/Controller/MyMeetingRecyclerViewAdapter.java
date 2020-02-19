@@ -89,11 +89,11 @@ public class MyMeetingRecyclerViewAdapter extends
 
         String[] myColors = context.getResources().getStringArray(R.array.room_color);
 
-                GradientDrawable gradientDrawable = new GradientDrawable();
-                gradientDrawable.mutate();
-                gradientDrawable.setShape(GradientDrawable.OVAL);
-                gradientDrawable.setColor(Color.parseColor(myColors[position % myColors.length]));
-                holder.mRoomColor.setBackground(gradientDrawable);
+        GradientDrawable gradientDrawable = new GradientDrawable();
+        gradientDrawable.mutate();
+        gradientDrawable.setShape(GradientDrawable.OVAL);
+        gradientDrawable.setColor(Color.parseColor(myColors[position % myColors.length]));
+        holder.mRoomColor.setBackground(gradientDrawable);
 
 
         holder.mMeetingDescriptive.setText("Réunion " + meeting.getMeetingRoom() + " - "
