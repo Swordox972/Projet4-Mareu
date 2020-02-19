@@ -6,15 +6,21 @@ import android.support.test.espresso.intent.Intents;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 
+import com.example.mareu.Model.Meeting;
+import com.example.mareu.Model.Participant;
 import com.example.mareu.R;
+import com.example.mareu.Service.Meetings;
 import com.example.mareu.utils.DeleteViewAction;
+import com.example.mareu.utils.RecyclerViewMatcher;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static android.support.test.espresso.Espresso.closeSoftKeyboard;
-import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
@@ -24,12 +30,8 @@ import static android.support.test.espresso.intent.matcher.IntentMatchers.hasCom
 import static android.support.test.espresso.matcher.ViewMatchers.assertThat;
 import static android.support.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.example.mareu.utils.AtPosition.atPosition;
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.instanceOf;
-import static org.hamcrest.Matchers.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 
 public class MeetingListInstrumentedTest {
@@ -114,34 +116,32 @@ public class MeetingListInstrumentedTest {
     @Test
     public void myMeetingListFilter() {
         myFakeMeetingCreationTest();
+        Participant participant = new Participant("Carole");
+        Participant participant1 = new Participant("k");
 
-        Intents.init();
+        List<Participant> participantList = new ArrayList<>();
+        participantList.add(participant);
+        participantList.add(participant1);
+
+        Meeting meeting = new Meeting('D', "12:01", 45,
+                "Princesse Peach", participantList);
+        Meetings.getInstance().getMeetingList().add(meeting);
+
         SystemClock.sleep(1000);
-        onView(withId(R.id.meeting_fab)).perform(click());
-        intended(hasComponent(CreateMeeting.class.getName()));
-
-        onView(withId(R.id.my_spinner_room)).perform(click());
-        onData(allOf(is(instanceOf(String.class)), is("B"))).perform(click());
-        onView(withId(R.id.my_spinner_room)).check(matches(withSpinnerText("B")));
-
-        onView(withId(R.id.durée_edit_text)).perform(typeText("45"));
-
-        closeSoftKeyboard();
-        onView(withId(R.id.meeting_subject)).perform(typeText("l"));
-
-        closeSoftKeyboard();
-
-        onView(withId(R.id.participants_button)).perform(click());
-        onView(withId(R.id.participant_1)).perform(typeText("P"));
-        onView(withId(R.id.participant_2)).perform(typeText("PP"));
-
-        closeSoftKeyboard();
-
-        onView(withId(R.id.confirm_participants_button)).perform(click());
-        SystemClock.sleep(2000);
-        onView(withId(R.id.confirm_button)).perform(click());
-
         onView(withId(R.id.app_bar_search)).perform(click());
+        SystemClock.sleep(1000);
+        onView(withId(android.support.design.R.id.search_src_text)).
+                perform(typeText("D"));
+        SystemClock.sleep(1000);
+
+        closeSoftKeyboard();
+
+        SystemClock.sleep(1000);
+        onView(new RecyclerViewMatcher(R.id.meeting_fragment).atPositionOnView(0,
+                R.id.meeting_descriptive)).check(matches(withText
+                ("Réunion D - 12:01 - Princesse Peach")));
 
     }
+
+
 }

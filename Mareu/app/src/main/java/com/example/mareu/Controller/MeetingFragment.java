@@ -69,6 +69,7 @@ public class MeetingFragment extends Fragment implements SearchView.OnQueryTextL
         super.onStart();
         EventBus.getDefault().register(this);
 
+
     }
 
     @Override
@@ -118,8 +119,10 @@ public class MeetingFragment extends Fragment implements SearchView.OnQueryTextL
 
     //Détruit la liste à la rotation de l'écran
     @Override
-    public void onDestroy() {
+    public void onDetach() {
+        super.onDetach();
         myAdapter.clearList();
-        super.onDestroy();
     }
+
+
 }
