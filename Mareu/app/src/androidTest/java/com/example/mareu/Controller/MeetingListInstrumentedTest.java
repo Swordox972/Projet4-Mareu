@@ -1,8 +1,6 @@
 package com.example.mareu.Controller;
 
 import android.os.SystemClock;
-import android.support.test.espresso.Espresso;
-import android.support.test.espresso.NoActivityResumedException;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.intent.Intents;
 import android.support.test.espresso.matcher.ViewMatchers;
@@ -24,7 +22,6 @@ import java.util.List;
 
 import static android.support.test.espresso.Espresso.closeSoftKeyboard;
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -36,7 +33,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.example.mareu.utils.AtPosition.atPosition;
 import static org.hamcrest.core.IsNull.notNullValue;
-import static org.junit.Assert.fail;
 
 public class MeetingListInstrumentedTest {
 
@@ -178,7 +174,7 @@ public class MeetingListInstrumentedTest {
                 R.id.meeting_descriptive)).check(matches(withText
                 ("Réunion D - 12:01 - Princesse Peach")));
 
-       Meetings.getInstance().getMeetingList().clear();
+        Meetings.getInstance().getMeetingList().clear();
 
     }
 }
