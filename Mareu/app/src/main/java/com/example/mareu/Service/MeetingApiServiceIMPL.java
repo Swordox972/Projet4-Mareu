@@ -1,5 +1,7 @@
 package com.example.mareu.Service;
 
+import android.util.Log;
+
 import com.example.mareu.Model.Meeting;
 import com.example.mareu.Model.Participant;
 
@@ -9,20 +11,25 @@ public class MeetingApiServiceIMPL implements MeetingApiService {
 
 
     private int convertHourToMinute(String time) {
+        int finalTimeInMinute = 0;
+
+        try {
+            int hour = Integer.parseInt(time.substring(0, 2));
 
 
-        int hour = Integer.parseInt(time.substring(0, 2));
+            int convertHourToMinute = hour * 60;
+
+            int minute = Integer.parseInt(time.substring(3));
+
+            finalTimeInMinute = convertHourToMinute + minute;
 
 
-        int convertHourToMinute = hour * 60;
+        } catch (NumberFormatException ne) {
+            Log.e("Hour start with 0", "Time start with 0");
 
-        int minute = Integer.parseInt(time.substring(3));
-
-        int finalTimeInMinute = convertHourToMinute + minute;
+        }
 
         return finalTimeInMinute;
-
-
     }
 
 
