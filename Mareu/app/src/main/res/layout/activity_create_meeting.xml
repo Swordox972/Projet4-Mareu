@@ -14,8 +14,8 @@
         android:layout_height="wrap_content"
         android:text="Salle: "
         android:textSize="@dimen/size_create_meeting_textview"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
     </TextView>
 
@@ -23,9 +23,9 @@
         android:id="@+id/my_spinner_room"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/salle"
         app:layout_constraintStart_toEndOf="@id/salle"
-        app:layout_constraintTop_toTopOf="@id/salle"
-        app:layout_constraintBottom_toBottomOf="@id/salle">
+        app:layout_constraintTop_toTopOf="@id/salle">
 
     </Spinner>
 
@@ -34,11 +34,11 @@
         android:id="@+id/heure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:text="Heure"
         android:textSize="@dimen/size_create_meeting_textview"
-        android:layout_marginTop="15dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/durée"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/salle">
 
     </TextView>
@@ -47,8 +47,8 @@
         android:id="@+id/time_picker_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/heure"
         app:layout_constraintBottom_toBottomOf="@id/heure"
+        app:layout_constraintStart_toEndOf="@id/heure"
         app:layout_constraintTop_toTopOf="@id/heure">
 
     </Button>
@@ -61,9 +61,9 @@
         android:layout_marginBottom="15dp"
         android:text="Durée"
         android:textSize="@dimen/size_create_meeting_textview"
-        app:layout_constraintTop_toBottomOf="@id/heure"
         app:layout_constraintBottom_toTopOf="@id/sujet"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/heure">
 
     </TextView>
 
@@ -71,10 +71,10 @@
         android:id="@+id/durée_edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
         android:inputType="number"
-        app:layout_constraintStart_toEndOf="@id/durée"
-        app:layout_constraintBottom_toBottomOf="@id/durée">
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/durée"
+        app:layout_constraintStart_toEndOf="@id/durée">
 
     </EditText>
 
@@ -84,9 +84,9 @@
         android:layout_height="wrap_content"
         android:text="Sujet"
         android:textSize="@dimen/size_create_meeting_textview"
-        app:layout_constraintTop_toTopOf="@id/durée"
+        app:layout_constraintBottom_toBottomOf="@id/participants"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/participants">
+        app:layout_constraintTop_toTopOf="@id/durée">
 
     </TextView>
 
@@ -94,12 +94,12 @@
         android:id="@+id/meeting_subject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:inputType="text"
         android:textSize="15sp"
         android:textStyle="bold"
-        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="@+id/sujet"
         app:layout_constraintStart_toEndOf="@+id/sujet"
-        app:layout_constraintTop_toTopOf="@+id/sujet"
-        app:layout_constraintBottom_toBottomOf="@+id/sujet">
+        app:layout_constraintTop_toTopOf="@+id/sujet">
 
     </EditText>
 
@@ -110,8 +110,8 @@
         android:layout_height="wrap_content"
         android:text="Participants"
         android:textSize="@dimen/size_create_meeting_textview"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/sujet">
 
     </TextView>
@@ -120,22 +120,22 @@
         android:id="@+id/participants_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@+id/participants"
+        app:layout_constraintBottom_toBottomOf="@+id/participants"
         app:layout_constraintStart_toEndOf="@+id/participants"
-        app:layout_constraintBottom_toBottomOf="@+id/participants">
+        app:layout_constraintTop_toTopOf="@+id/participants">
 
     </Button>
 
     <ImageButton
         android:id="@+id/confirm_button"
-        android:contentDescription="boutton vers time spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
-        android:tint="#26DD2D"
         android:background="@null"
+        android:contentDescription="boutton vers time spinner"
         android:src="@drawable/baseline_done_black_36"
+        android:tint="#26DD2D"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 

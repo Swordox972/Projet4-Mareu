@@ -66,7 +66,7 @@ public class TimePickerActivity extends AppCompatActivity {
             }
 
             time += ":" + time1;
-            dateFormat = new SimpleDateFormat("k:mm");
+            dateFormat = new SimpleDateFormat("H:mm");
             dateObj = dateFormat.parse(time);
             intent.putExtra("MEETING_TIME", time);
             setResult(RESULT_OK, intent);

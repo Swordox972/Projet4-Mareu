@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+//Implements for spinner
 public class CreateMeeting extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private Spinner mSpinnerRoomName;
@@ -155,7 +156,7 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
                                 "Reunion incorrecte, vérifiez que vous avez rempli les " +
                                         "champs correctement ou que l'heure de début et " +
                                         "l'heure de fin d'une autre réunion ne se confronte pas" +
-                                        " à une autre réunion en fonction de la salle"
+                                        " à votre réunion en fonction de la salle"
                                 , Toast.LENGTH_LONG);
                         myToast.show();
                     }
@@ -181,6 +182,7 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
     }
 
 
+    //For spinner
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         parent.getItemAtPosition(position);
