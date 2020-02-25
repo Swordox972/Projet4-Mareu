@@ -52,13 +52,17 @@ public class ListParticipantsActivity extends AppCompatActivity {
     }
 
 
-    public void confirmParticipantButton() {
-        Intent myIntent = new Intent();
-        myIntent.putParcelableArrayListExtra("ListParticipant", listParticipant);
-        setResult(RESULT_OK, myIntent);
-        finish();
+    public void participantEditText() {
+        mParticipant1 = findViewById(R.id.participant_1);
+        mParticipant2 = findViewById(R.id.participant_2);
+        mParticipant3 = findViewById(R.id.participant_3);
+
+        mParticipant1.setHint("Participant 1");
+        mParticipant2.setHint("Participant 2");
+        mParticipant3.setHint("Participant 3");
 
     }
+
 
     public void addParticipant() {
         mAddParticipant = findViewById(R.id.add_more_participants);
@@ -132,14 +136,11 @@ public class ListParticipantsActivity extends AppCompatActivity {
         }
     }
 
-    public void participantEditText() {
-        mParticipant1 = findViewById(R.id.participant_1);
-        mParticipant2 = findViewById(R.id.participant_2);
-        mParticipant3 = findViewById(R.id.participant_3);
-
-        mParticipant1.setHint("Participant 1");
-        mParticipant2.setHint("Participant 2");
-        mParticipant3.setHint("Participant 3");
+    public void confirmParticipantButton() {
+        Intent myIntent = new Intent();
+        myIntent.putParcelableArrayListExtra("ListParticipant", listParticipant);
+        setResult(RESULT_OK, myIntent);
+        finish();
 
     }
 

@@ -84,23 +84,38 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
 
     }
 
-    public void returnTimeFormat(String time) {
+    public void spinnerRoomName() {
+        mSpinnerRoomName = findViewById(R.id.my_spinner_room);
 
-        try {
-            dateFormat = new SimpleDateFormat("H:mm");
-            dateObj = dateFormat.parse(time);
-            mTimePickerButton.setText(new SimpleDateFormat("H:mm").format(dateObj));
-        } catch (final ParseException e) {
-            e.printStackTrace();
-        }
+        ArrayAdapter<CharSequence> mArrayAdapter = ArrayAdapter.createFromResource(this,
+                R.array.room_name, R.layout.support_simple_spinner_dropdown_item);
+        mArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+
+        mSpinnerRoomName.setAdapter(mArrayAdapter);
+        mSpinnerRoomName.setOnItemSelectedListener(this);
+
     }
 
-    public void participantsActivityIntent() {
-        Intent mParticipantsIntent = new Intent(this, ListParticipantsActivity.class);
-        mParticipantsIntent.putParcelableArrayListExtra
-                ("ListParticipant", meetingParticipantList);
-        startActivityForResult(mParticipantsIntent, 1);
+
+    //For spinner
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        parent.getItemAtPosition(position);
     }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    public void timePickerIntent() {
+        Intent mTimePickerIntent = new Intent(this, TimePickerActivity.class);
+
+        mTimePickerIntent.putExtra("MEETING_TIME", time);
+        startActivityForResult(mTimePickerIntent, 0);
+
+    }
+
 
     public void myMeetingDuration() {
         mMeetingDuration = findViewById(R.id.durée_edit_text);
@@ -112,6 +127,13 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
         mMeetingSubject = findViewById(R.id.meeting_subject);
         mMeetingSubject.setHint("Tapez votre sujet de réunion");
 
+    }
+
+    public void participantsActivityIntent() {
+        Intent mParticipantsIntent = new Intent(this, ListParticipantsActivity.class);
+        mParticipantsIntent.putParcelableArrayListExtra
+                ("ListParticipant", meetingParticipantList);
+        startActivityForResult(mParticipantsIntent, 1);
     }
 
 
@@ -169,36 +191,15 @@ public class CreateMeeting extends AppCompatActivity implements AdapterView.OnIt
 
     }
 
-    public void spinnerRoomName() {
-        mSpinnerRoomName = findViewById(R.id.my_spinner_room);
+    public void returnTimeFormat(String time) {
 
-        ArrayAdapter<CharSequence> mArrayAdapter = ArrayAdapter.createFromResource(this,
-                R.array.room_name, R.layout.support_simple_spinner_dropdown_item);
-        mArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-
-        mSpinnerRoomName.setAdapter(mArrayAdapter);
-        mSpinnerRoomName.setOnItemSelectedListener(this);
-
-    }
-
-
-    //For spinner
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        parent.getItemAtPosition(position);
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-    public void timePickerIntent() {
-        Intent mTimePickerIntent = new Intent(this, TimePickerActivity.class);
-
-        mTimePickerIntent.putExtra("MEETING_TIME", time);
-        startActivityForResult(mTimePickerIntent, 0);
-
+        try {
+            dateFormat = new SimpleDateFormat("H:mm");
+            dateObj = dateFormat.parse(time);
+            mTimePickerButton.setText(new SimpleDateFormat("H:mm").format(dateObj));
+        } catch (final ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -66,6 +66,7 @@ public class MeetingListInstrumentedTest {
 
         onView(withId(R.id.participants_button)).perform(click());
         onView(withId(R.id.participant_1)).perform(typeText("P"));
+        SystemClock.sleep(500);
         onView(withId(R.id.participant_2)).perform(typeText("PP"));
 
         closeSoftKeyboard();
