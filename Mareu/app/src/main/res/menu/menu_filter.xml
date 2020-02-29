@@ -8,6 +8,5 @@
         android:icon="@mipmap/baseline_filter_list_black_36"
         android:title="Search"
         app:showAsAction="always|collapseActionView"
-        app:iconTint="@android:color/white"
-        app:actionViewClass="android.support.v7.widget.SearchView" />
+        app:iconTint="@android:color/white" />
 </menu>

@@ -2,12 +2,13 @@ package com.example.mareu.Controller;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,24 +24,36 @@ import com.example.mareu.events.DeleteMeetingEvent;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
 import static com.example.mareu.Service.MeetingFilterList.meetingFilterList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MeetingFragment extends Fragment implements SearchView.OnQueryTextListener {
+public class MeetingFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private List<Meeting> mMeetingList;
     private MyMeetingRecyclerViewAdapter myAdapter;
-
+    private char roomFilter;
+    private String hourFilter;
+    private List<Meeting> meetingFilterList;
 
     public MeetingFragment() {
         // Required empty public constructor
     }
 
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        hourFilter="";
+        meetingFilterList=new ArrayList<>();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -95,27 +108,25 @@ public class MeetingFragment extends Fragment implements SearchView.OnQueryTextL
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_filter, menu);
-        MenuItem menuItem = menu.findItem(R.id.app_bar_search);
-        SearchView searchView = (SearchView) menuItem.getActionView();
-        searchView.setOnQueryTextListener(this);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    @Override
-    public boolean onQueryTextSubmit(String s) {
-        return false;
-    }
 
     @Override
-    public boolean onQueryTextChange(String s) {
-        List<Meeting> myFilteredList = meetingFilterList(mMeetingList, s);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.app_bar_search:
+                Intent intent = new Intent(getContext(), PopUpFilter.class);
+                intent.putExtra("RoomFilter", roomFilter);
+                intent.putExtra("HourFilter", hourFilter);
+                startActivityForResult(intent, 0);
+                return true;
 
-
-        myAdapter.updateList(myFilteredList);
-        return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
 
     }
-
 
     //Détruit la liste à la rotation de l'écran
     @Override
@@ -124,5 +135,32 @@ public class MeetingFragment extends Fragment implements SearchView.OnQueryTextL
         myAdapter.clearList();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == 0) {
+            if (resultCode == RESULT_OK) {
+                roomFilter = data.getCharExtra("RoomFilter", 'M');
+                String roomFilterString = Character.toString(roomFilter);
+
+                if (roomFilter != 'M') {
+                    meetingFilterList = meetingFilterList(mMeetingList, roomFilterString);
+
+                    myAdapter.updateList(meetingFilterList);
+
+                }
+
+                hourFilter = data.getStringExtra("HourFilter");
+                if (hourFilter!=null) {
+                    meetingFilterList = meetingFilterList(mMeetingList, hourFilter);
+
+                    myAdapter.updateList(meetingFilterList);
+                }
+
+            } else {
+            }
+        } else {
+        }
+    }
 }

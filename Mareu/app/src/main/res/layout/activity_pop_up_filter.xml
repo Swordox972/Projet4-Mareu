@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Controller.PopUpFilter">
+
+    <TextView
+        android:id="@+id/spinner_textview_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filtrer par le lieu: "
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </TextView>
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spinner_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:spinnerMode="dialog"
+        app:layout_constraintBottom_toTopOf="@+id/textview_sinon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinner_textview_search">
+
+    </android.support.v7.widget.AppCompatSpinner>
+
+    <ImageButton
+        android:id="@+id/confirm_button_filter_room"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="60dp"
+        android:background="@null"
+        android:src="@drawable/baseline_done_black_36"
+        android:tint="#26DD2D"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinner_search">
+
+    </ImageButton>
+
+    <TextView
+        android:id="@+id/textview_sinon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:text="sinon:"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/time_picker_search_textview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinner_search">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/time_picker_search_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filtrer par heure: "
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </TextView>
+
+    <Button
+        android:id="@+id/time_picker_filter_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/time_picker_search_textview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent">
+
+    </Button>
+
+    <ImageButton
+        android:id="@+id/confirm_button_filter_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@null"
+        android:src="@drawable/baseline_done_black_36"
+        android:tint="#26DD2D"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </ImageButton>
+
+</android.support.constraint.ConstraintLayout>
