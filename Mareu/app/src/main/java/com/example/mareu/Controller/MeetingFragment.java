@@ -41,6 +41,7 @@ public class MeetingFragment extends Fragment {
     private char roomFilter;
     private String hourFilter;
     private List<Meeting> meetingFilterList;
+    private boolean notFiltered = true;
 
     public MeetingFragment() {
         // Required empty public constructor
@@ -51,8 +52,8 @@ public class MeetingFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        hourFilter="";
-        meetingFilterList=new ArrayList<>();
+        hourFilter = "";
+        meetingFilterList = new ArrayList<>();
     }
 
     @Override
@@ -70,10 +71,16 @@ public class MeetingFragment extends Fragment {
     }
 
     private void initList() {
-        myAdapter = new MyMeetingRecyclerViewAdapter(getActivity(), mMeetingList);
+        if (notFiltered) {
 
-        mMeetingList = Meetings.getInstance().getMeetingList();
-        mRecyclerView.setAdapter(myAdapter);
+            myAdapter = new MyMeetingRecyclerViewAdapter(getActivity(), mMeetingList);
+
+            mMeetingList = Meetings.getInstance().getMeetingList();
+            mRecyclerView.setAdapter(myAdapter);
+        } else {
+            myAdapter = new MyMeetingRecyclerViewAdapter(getActivity(), meetingFilterList);
+            mRecyclerView.setAdapter(myAdapter);
+        }
 
     }
 
@@ -140,9 +147,11 @@ public class MeetingFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 0) {
+
             if (resultCode == RESULT_OK) {
                 roomFilter = data.getCharExtra("RoomFilter", 'M');
                 String roomFilterString = Character.toString(roomFilter);
+
 
                 if (roomFilter != 'M') {
                     meetingFilterList = meetingFilterList(mMeetingList, roomFilterString);
@@ -152,14 +161,16 @@ public class MeetingFragment extends Fragment {
                 }
 
                 hourFilter = data.getStringExtra("HourFilter");
-                if (hourFilter!=null) {
+                if (hourFilter != null) {
                     meetingFilterList = meetingFilterList(mMeetingList, hourFilter);
 
                     myAdapter.updateList(meetingFilterList);
                 }
 
+                notFiltered = false;
             } else {
             }
+            notFiltered = true;
         } else {
         }
     }

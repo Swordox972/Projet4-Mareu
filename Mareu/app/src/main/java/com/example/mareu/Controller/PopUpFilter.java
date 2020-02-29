@@ -119,7 +119,7 @@ public class PopUpFilter extends AppCompatActivity implements AdapterView.OnItem
                                             view.getCurrentMinute();
                                 }
                             }
-                        }, 0, 0, false);
+                        }, 0, 0, true);
 
                 timePickerDialog.show();
             }
