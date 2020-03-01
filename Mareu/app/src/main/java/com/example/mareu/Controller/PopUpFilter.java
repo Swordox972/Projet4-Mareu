@@ -112,6 +112,7 @@ public class PopUpFilter extends AppCompatActivity implements AdapterView.OnItem
                                 if (Build.VERSION.SDK_INT > 23) {
                                     hourFilterSelected = view.getHour() + ":" + view.getMinute();
 
+                                    myTimePickerFilterButton.setText(hourFilterSelected);
                                 } else {
                                     hourFilterSelected = view.getCurrentHour() + ":" +
                                             view.getCurrentMinute();
@@ -126,8 +127,9 @@ public class PopUpFilter extends AppCompatActivity implements AdapterView.OnItem
 
     private void confirmFilterWithHour() {
         String hourFilterFormat = returnTimeFormat(hourFilterSelected);
+
         Intent intent = new Intent();
-        String  hourFilter=hourFilterFormat;
+        String hourFilter = hourFilterFormat;
         intent.putExtra("HourFilter", hourFilter);
         setResult(RESULT_OK, intent);
         finish();
@@ -135,13 +137,20 @@ public class PopUpFilter extends AppCompatActivity implements AdapterView.OnItem
 
 
     public String returnTimeFormat(String time) {
+        String finalReturn = "";
         try {
-            dateFormat = new SimpleDateFormat("H:mm");
-            date = dateFormat.parse(time);
+            if (time != null) {
+                dateFormat = new SimpleDateFormat("H:mm");
+                date = dateFormat.parse(time);
+            }
         } catch (final ParseException e) {
             e.printStackTrace();
         }
 
-        return new SimpleDateFormat("H:mm").format(date);
+        if (date != null) {
+            return finalReturn = new SimpleDateFormat("H:mm").format(date);
+        }
+
+        return finalReturn;
     }
 }

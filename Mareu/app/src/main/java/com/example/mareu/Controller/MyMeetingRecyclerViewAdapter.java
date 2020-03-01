@@ -30,6 +30,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.mareu.Service.MeetingRefreshList.refreshMyMeeting;
+
 public class MyMeetingRecyclerViewAdapter extends
         RecyclerView.Adapter<MyMeetingRecyclerViewAdapter.ViewHolder> {
 
@@ -153,9 +155,7 @@ public class MyMeetingRecyclerViewAdapter extends
     }
 
     public void removeFilterList() {
-        mMeetingList.clear();
-        mMeetingList.addAll(Meetings.getInstance().getSaveMeetingList());
-        Meetings.getInstance().getSaveMeetingList().clear();
+        refreshMyMeeting(mMeetingList);
         notifyDataSetChanged();
     }
 

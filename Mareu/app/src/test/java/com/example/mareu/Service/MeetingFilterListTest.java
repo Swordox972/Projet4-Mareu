@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.mareu.Service.MeetingFilterList.meetingFilterList;
+import static com.example.mareu.Service.MeetingRefreshList.refreshMyMeeting;
 
 public class MeetingFilterListTest {
 
@@ -101,6 +102,39 @@ public class MeetingFilterListTest {
         assert !meetingListFiltered.contains(meeting);
         assert !meetingListFiltered.contains(meeting1);
         assert meetingListFiltered.size() == 0;
+
+    }
+
+    @Test
+    public void myRefreshMeetingButton() {
+        List<Meeting> meetingList = Meetings.getInstance().getMeetingList();
+
+        Meeting meeting = new Meeting('A', "12:02", 45,
+                "Lol", new ArrayList<Participant>());
+
+        Meeting meeting1 = new Meeting('B', "05:42", 50,
+                "Lol", new ArrayList<Participant>());
+
+        meetingList.add(meeting);
+        meetingList.add(meeting1);
+
+        List<Meeting> saveMyMeetingList = Meetings.getInstance().getSaveMeetingList();
+        saveMyMeetingList.addAll(meetingList);
+
+        String meetingRoom = "12";
+
+        List<Meeting> meetingListFiltered = meetingFilterList(meetingList, meetingRoom);
+
+        assert meetingListFiltered.contains(meeting);
+        assert meetingListFiltered.size() == 1;
+
+        List<Meeting> refreshedMeetingList = refreshMyMeeting(meetingListFiltered);
+
+        assert refreshedMeetingList.contains(meeting);
+        assert refreshedMeetingList.contains(meeting1);
+        assert refreshedMeetingList.size() == 2;
+
+        meetingList.clear();
 
     }
 }
