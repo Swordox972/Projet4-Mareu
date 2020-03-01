@@ -23,6 +23,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -36,6 +37,7 @@ public class MyMeetingRecyclerViewAdapter extends
     private List<Meeting> mMeetingList;
     private SimpleDateFormat dateFormat;
     private Date date;
+    private List<Meeting> saveMyMeeting;
 
 
     public MyMeetingRecyclerViewAdapter(Context context, List<Meeting> items) {
@@ -142,9 +144,18 @@ public class MyMeetingRecyclerViewAdapter extends
     }
 
     public void updateList(List<Meeting> newMeetingList) {
-        mMeetingList = newMeetingList;
+        saveMyMeeting = new ArrayList<>();
+        saveMyMeeting.addAll(mMeetingList);
+        mMeetingList.clear();
+        mMeetingList.addAll(newMeetingList);
         notifyDataSetChanged();
 
+    }
+
+    public void removeFilterList() {
+        mMeetingList.clear();
+        mMeetingList.addAll(saveMyMeeting);
+        notifyDataSetChanged();
     }
 
     public void clearList() {

@@ -95,6 +95,7 @@ public class MeetingFilterListTest {
 
         String meetingRoom = "3";
 
+        //Method to filter
         List<Meeting> meetingListFiltered = meetingFilterList(meetingList, meetingRoom);
 
         assert !meetingListFiltered.contains(meeting);

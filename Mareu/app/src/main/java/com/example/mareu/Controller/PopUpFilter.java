@@ -23,7 +23,6 @@ import java.util.Date;
 import java.util.List;
 
 public class PopUpFilter extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    private char roomFilterSelected;
     private String hourFilterSelected;
     private Spinner myFilterSpinner;
     private Button myTimePickerFilterButton;
@@ -33,6 +32,7 @@ public class PopUpFilter extends AppCompatActivity implements AdapterView.OnItem
     private Date date;
     private MyMeetingRecyclerViewAdapter myAdapter;
     private List<Meeting> meetingList;
+    private char roomFilter;
 
 
     @Override
@@ -92,11 +92,9 @@ public class PopUpFilter extends AppCompatActivity implements AdapterView.OnItem
 
     private void confirmFilterWithRoom() {
         Intent intent = new Intent();
-        char roomFilter = intent.getCharExtra("RoomFilter", 'M');
-        roomFilter = myFilterSpinner.getSelectedItem().toString().charAt(0);
-        String roomFilterToString = Character.toString(roomFilter);
 
-        intent.putExtra("RoomFilter", roomFilterToString);
+        roomFilter = myFilterSpinner.getSelectedItem().toString().charAt(0);
+        intent.putExtra("RoomFilter", roomFilter);
         setResult(RESULT_OK, intent);
         finish();
     }
@@ -129,10 +127,9 @@ public class PopUpFilter extends AppCompatActivity implements AdapterView.OnItem
     private void confirmFilterWithHour() {
         String hourFilterFormat = returnTimeFormat(hourFilterSelected);
         Intent intent = new Intent();
-        String hourFilter = intent.getStringExtra("HourFilter");
-        hourFilter=hourFilterFormat;
+        String  hourFilter=hourFilterFormat;
         intent.putExtra("HourFilter", hourFilter);
-        setResult(RESULT_OK);
+        setResult(RESULT_OK, intent);
         finish();
     }
 

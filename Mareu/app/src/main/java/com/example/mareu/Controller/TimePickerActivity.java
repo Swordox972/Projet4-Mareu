@@ -65,6 +65,9 @@ public class TimePickerActivity extends AppCompatActivity {
                 time1 = Integer.toString(minute);
             }
 
+            if (time1.length() == 1) {
+                time1 = "0" + time1;
+            }
             time += ":" + time1;
             dateFormat = new SimpleDateFormat("H:mm");
             dateObj = dateFormat.parse(time);

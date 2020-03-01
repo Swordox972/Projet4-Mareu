@@ -4,7 +4,6 @@ package com.example.mareu.Controller;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -38,23 +37,14 @@ public class MeetingFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private List<Meeting> mMeetingList;
     private MyMeetingRecyclerViewAdapter myAdapter;
-    private char roomFilter;
+    private char roomFilter = 'A';
     private String hourFilter;
-    private List<Meeting> meetingFilterList;
-    private boolean notFiltered = true;
+    List<Meeting> meetingFilterList = new ArrayList<>();
 
     public MeetingFragment() {
         // Required empty public constructor
     }
 
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        hourFilter = "";
-        meetingFilterList = new ArrayList<>();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,16 +61,16 @@ public class MeetingFragment extends Fragment {
     }
 
     private void initList() {
-        if (notFiltered) {
 
-            myAdapter = new MyMeetingRecyclerViewAdapter(getActivity(), mMeetingList);
+        myAdapter = new MyMeetingRecyclerViewAdapter(getActivity(), mMeetingList);
+        mMeetingList = Meetings.getInstance().getMeetingList();
+        mRecyclerView.setAdapter(myAdapter);
 
-            mMeetingList = Meetings.getInstance().getMeetingList();
-            mRecyclerView.setAdapter(myAdapter);
-        } else {
-            myAdapter = new MyMeetingRecyclerViewAdapter(getActivity(), meetingFilterList);
-            mRecyclerView.setAdapter(myAdapter);
-        }
+    }
+
+    private void initFilteredList() {
+        myAdapter.updateList(meetingFilterList);
+
 
     }
 
@@ -146,6 +136,7 @@ public class MeetingFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+
         if (requestCode == 0) {
 
             if (resultCode == RESULT_OK) {
@@ -155,22 +146,20 @@ public class MeetingFragment extends Fragment {
 
                 if (roomFilter != 'M') {
                     meetingFilterList = meetingFilterList(mMeetingList, roomFilterString);
-
-                    myAdapter.updateList(meetingFilterList);
-
+                    initFilteredList();
                 }
 
                 hourFilter = data.getStringExtra("HourFilter");
-                if (hourFilter != null) {
+                if (roomFilter == 'M') {
                     meetingFilterList = meetingFilterList(mMeetingList, hourFilter);
 
-                    myAdapter.updateList(meetingFilterList);
+                    initFilteredList();
                 }
 
-                notFiltered = false;
+
             } else {
             }
-            notFiltered = true;
+
         } else {
         }
     }
