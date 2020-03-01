@@ -1,6 +1,7 @@
 package com.example.mareu.Controller;
 
 
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -40,7 +41,7 @@ public class MeetingFragment extends Fragment {
     private char roomFilter = 'A';
     private String hourFilter;
     List<Meeting> meetingFilterList = new ArrayList<>();
-
+    private MenuItem refreshList;
     public MeetingFragment() {
         // Required empty public constructor
     }
@@ -105,8 +106,11 @@ public class MeetingFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_filter, menu);
+        refreshList= menu.findItem(R.id.refresh_list);
+        refreshList.setVisible(false);
         super.onCreateOptionsMenu(menu, inflater);
     }
+
 
 
     @Override
@@ -117,6 +121,11 @@ public class MeetingFragment extends Fragment {
                 intent.putExtra("RoomFilter", roomFilter);
                 intent.putExtra("HourFilter", hourFilter);
                 startActivityForResult(intent, 0);
+                return true;
+
+            case R.id.refresh_list:
+                myAdapter.removeFilterList();
+                refreshList.setVisible(false);
                 return true;
 
             default:
@@ -156,6 +165,7 @@ public class MeetingFragment extends Fragment {
                     initFilteredList();
                 }
 
+                refreshList.setVisible(true);
 
             } else {
             }

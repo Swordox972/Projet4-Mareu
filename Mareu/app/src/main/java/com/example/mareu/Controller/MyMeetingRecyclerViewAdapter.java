@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.mareu.Model.Meeting;
 import com.example.mareu.Model.Participant;
 import com.example.mareu.R;
+import com.example.mareu.Service.Meetings;
 import com.example.mareu.events.DeleteMeetingEvent;
 import com.example.mareu.events.OpenMeetingEvent;
 
@@ -23,7 +24,6 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -144,7 +144,7 @@ public class MyMeetingRecyclerViewAdapter extends
     }
 
     public void updateList(List<Meeting> newMeetingList) {
-        saveMyMeeting = new ArrayList<>();
+        saveMyMeeting = Meetings.getInstance().getSaveMeetingList();
         saveMyMeeting.addAll(mMeetingList);
         mMeetingList.clear();
         mMeetingList.addAll(newMeetingList);
@@ -154,7 +154,8 @@ public class MyMeetingRecyclerViewAdapter extends
 
     public void removeFilterList() {
         mMeetingList.clear();
-        mMeetingList.addAll(saveMyMeeting);
+        mMeetingList.addAll(Meetings.getInstance().getSaveMeetingList());
+        Meetings.getInstance().getSaveMeetingList().clear();
         notifyDataSetChanged();
     }
 
