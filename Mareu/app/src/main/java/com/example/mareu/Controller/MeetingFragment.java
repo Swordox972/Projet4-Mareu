@@ -1,7 +1,6 @@
 package com.example.mareu.Controller;
 
 
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,6 +41,7 @@ public class MeetingFragment extends Fragment {
     private String hourFilter;
     List<Meeting> meetingFilterList = new ArrayList<>();
     private MenuItem refreshList;
+
     public MeetingFragment() {
         // Required empty public constructor
     }
@@ -106,11 +106,10 @@ public class MeetingFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_filter, menu);
-        refreshList= menu.findItem(R.id.refresh_list);
+        refreshList = menu.findItem(R.id.refresh_list);
         refreshList.setVisible(false);
         super.onCreateOptionsMenu(menu, inflater);
     }
-
 
 
     @Override
